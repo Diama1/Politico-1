@@ -3,9 +3,10 @@
 
 ## Features
 
- - Users can sign up. Users can login. Admin (electoral body) can create
+ - Users can sign up. Users can login. 
  - User can reset password.
- - political parties. Admin (electoral body) can delete a political
- - party. Admin (electoral body) can create different ​ political
- - offices​ . Users can vote for only one politician per ​ political
- - office​ . Users can see the results of election.
+ - Admin (electoral body) can create political parties. 
+ - Admin (electoral body) can delete a political party.
+ - Admin (electoral body) can create different ​ political offices​ . 
+ - Users can vote for only one politician per ​ political offices​ . 
+ - Users can see the results of election.
