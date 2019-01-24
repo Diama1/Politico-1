@@ -170,6 +170,9 @@ body{
 .container{
   padding: 2rem;
 }
+.login .container{
+  padding: 4rem 2rem; 
+}
 
 .signup-block .container small{
   color: #666;
@@ -194,6 +197,7 @@ input[type=text],input[type=email], input[type=password] {
   font-weight: 600;
   font-size: 16px;
   margin-top: 10px;
+  font-family: "nunito";
 }
 
 .signup-block .button:hover{
