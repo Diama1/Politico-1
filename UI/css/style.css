@@ -18,6 +18,20 @@ body{
 }
 
 
+.block-large{
+  flex: 0 0 83%;
+  max-width: 83%;
+}
+.block-medium{
+  flex: 0 0 58%;
+  max-width: 58%;
+}
+.block-small{
+  flex: 0 0 33%;
+  max-width: 33%;
+}
+
+
 .navbar{
   padding: 0.3rem 2rem;
   background-color: var(--color-primary-dark);
@@ -81,7 +95,11 @@ body{
 
 /* Phones (phones, 768px and down) */
 @media only screen and (max-width: 768px) {
-
+  body .admin .block-large{
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin: 4rem auto;
+  }
 } 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -221,4 +239,121 @@ input[type=text],input[type=email], input[type=password] {
   width: 100%;
   flex: 0 0 40%;
   max-width: 40%;
+}
+
+/* ----------------admin-------------------- */
+
+.admin .block{
+  position: relative;
+  width: 100%;
+}
+
+
+.admin .block-large{
+  flex: 0 0 83%;
+  max-width: 83%;
+  margin: 4rem auto;
+}
+.admin .block-medium{
+  flex: 0 0 58%;
+  max-width: 58%;
+}
+.admin .block-small{
+  flex: 0 0 33%;
+  max-width: 33%;
+}
+
+/* tab */
+
+.admin .tab{
+  padding: 4px 12px;
+}
+.admin .tab ul{
+  list-style: none;
+  border: 2px solid #dfd8d9;
+  padding: 0;
+  margin: 0;
+}
+
+.admin .tab ul li{
+  padding: 8px 15px;
+  /* background-color: var(--color-light); */
+  border-bottom: 2px solid #dfd8d9;
+}
+
+.admin .tab ul li a {
+  color: #444;
+  text-decoration: none;
+}
+
+.admin .tab ul li:last-child{
+  border: none;
+}
+.admin .tab ul li:first-child{
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  font-weight: 600;
+  text-align: center;
+}
+
+.admin .tab ul li.active{
+  border-left: 3px solid var(--color-fancy);
+  border-right: 3px solid var(--color-fancy);
+}
+
+/* content */
+
+.admin .content{
+  border: 2px solid #dfd8d9;
+}
+
+.admin .content .header{
+  padding: 8px 13px;
+  border-bottom: 2px solid #dfd8d9;
+}
+
+.admin .content h3{
+  margin: 0;
+}
+
+.admin .content .body{
+  min-height: 150px;
+}
+
+/* navbar */
+
+.button-nav-profile{
+  color: var(--color-extra) !important;
+  
+}
+.button-nav-profile:hover{
+  cursor: pointer;
+}
+
+.navbar .menu-profile{
+  display: none;
+  background: #fcfcfc;
+  position: fixed;
+  right: 2%;
+  top: 71px;
+  border: 2px solid #dfd8d9;
+}
+
+.navbar .menu-profile ul li{
+  display: block;
+  border-bottom: 2px solid #dfd8d9;
+  margin: 0;
+  padding: 5px 3rem;
+}
+.navbar .menu-profile ul li:hover {
+  background: var(--color-primary-dark);
+}
+.navbar .menu-profile ul li a{
+  color: #666;
+}
+.navbar .menu-profile ul li:hover a{
+  color: var(--color-light);
+}
+.navbar .menu-profile ul li:last-child{
+  border-bottom: none;
 }
