@@ -178,7 +178,7 @@ body{
   color: #666;
 }
 form{
-  margin-top: 14px;
+  margin: 14px 0 40px 0;
 }
 
 input[type=text],input[type=email], input[type=password] {
@@ -203,4 +203,22 @@ input[type=text],input[type=email], input[type=password] {
 .signup-block .button:hover{
   background: var(--color-fancy);
   color: var(--color-primary);
+}
+
+.reset-password-link{
+  margin-top: 2rem;
+}
+
+.reset .content{
+  position: relative;
+  width: 100%;
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.reset .signup-block{
+  position: relative;
+  width: 100%;
+  flex: 0 0 40%;
+  max-width: 40%;
 }
