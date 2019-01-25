@@ -3,4 +3,14 @@ toggle between hiding and showing the dropdown content */
 function showMenu() {
   document.getElementById("menu").classList.toggle("show");
 }
+function showProfile() {
+  document.getElementById("menu-profile").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('#dropdown-btn')) {
+    document.getElementById("menu-profile").classList.remove("show");
+  }
+}
 
