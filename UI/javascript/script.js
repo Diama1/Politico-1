@@ -14,3 +14,12 @@ window.onclick = function(event) {
   }
 }
 
+
+function confirmDelete(){
+  if (confirm('Are you sure you want to delete this party?')) {
+    // Save it!
+} else {
+    // Do nothing!
+}
+}
+
