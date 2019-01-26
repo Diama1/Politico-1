@@ -15,7 +15,7 @@ window.onclick = function(event) {
 }
 
 
-function confirmDelete(){
+function confirmDeleteParty(){
   if (confirm('Are you sure you want to delete this party?')) {
     // Save it!
 } else {
