@@ -22,4 +22,11 @@ function confirmDeleteParty(){
     // Do nothing!
 }
 }
+function confirmDeleteOffice(){
+  if (confirm('Are you sure you want to delete this office?')) {
+    // Save it!
+} else {
+    // Do nothing!
+}
+}
 
