@@ -460,3 +460,16 @@ td{
 .admin .content .button-notice:hover{
   background-color: rgb(115, 131, 89);
 }
+
+/* edit party */
+
+.admin .content .avatar{
+  width: 90px;
+  border: 2px dashed #dfd8d9;
+  padding: 4px;
+}
+
+.admin .content .avatar img{
+  width: 100%;
+  height: auto;
+}
