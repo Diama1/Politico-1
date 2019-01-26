@@ -225,7 +225,7 @@ form{
   margin: 14px 0 40px 0;
 }
 
-input[type=text],input[type=email], input[type=password], textarea {
+input[type=text],input[type=email], input[type=password], textarea, select {
   width: 100%;
   border: 2px solid #e0dada;
   border-radius: 4px;
