@@ -527,10 +527,37 @@ td{
   max-width: 83%;
 }
 
+.index .card .card-actions{
+  justify-content: space-between;
+}
+.index .card .card-actions .candidates{
+  color: #777;
+  margin-right: 35px;
+}
+
 .index form small {
   display: block;
   margin-top: -8px;
   margin-bottom: 15px;
+}
+
+.index .candidate{
+  padding: 4px 0;
+  border-bottom: 2px solid #dfd8d9;
+}
+
+.index .candidate .avatar{
+  width: 60px;
+  height: 60px;
+  margin-right: 1rem;
+  
+}
+.index .candidate .avatar img{
+  width:100%;
+  height: 100%;
+  border-radius: 40px;
+  box-shadow: 5px 5px 25px 0px rgba(46, 61, 73, 0.2);
+
 }
 
 /* parties */
