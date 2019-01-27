@@ -85,8 +85,16 @@ body{
 .button-notice{
   color: #ACC18A;
 }
+.button-notice-fill{
+  background-color: #ACC18A;
+  color: var(--color-light-light);
+}
 .button-alert{
   color: #FB6107;
+}
+.button-alert-fill{
+  background-color: #FB6107;
+  color: var(--color-dark);
 }
 .button-notice:hover{
   background-color: #ACC18A;
@@ -98,6 +106,14 @@ body{
   background-color: #FB6107;
   border-color: #FB6107;
   color: var(--color-dark)
+}
+.button-notice-fill:hover{
+  background-color: rgb(142, 158, 116);
+  border-color:rgb(142, 158, 116);
+}
+.button-alert:hover{
+  background-color: rgb(224, 100, 28);
+  border-color: rgb(224, 100, 28);
 }
 .button-register{
   padding: 4px 8px;
@@ -172,9 +188,13 @@ body{
   
 } 
 
+/* above tablet ( laptop and desktop) */
 @media all and (min-width: 871px){
   .show{
     min-width: auto !important;
+  }
+  .index .modal-content {
+    width: 40%;
   }
 }
 
@@ -491,12 +511,32 @@ td{
 }
 
  .card{
-  padding: 5px 14px;
+  padding: 2px 14px  8px 14px;
   margin-bottom: 12px;
   box-shadow: 5px 5px 25px 0px rgba(46, 61, 73, 0.2);
 }
 
+.index .card .button {
+  box-shadow: 5px 5px 25px 0px rgba(46, 61, 73, 0.2);
+  border-color: transparent;
+  text-align: center;
+}
+
+.index .block-large{
+  flex: 0 0 83%;
+  max-width: 83%;
+}
+
+.index form small {
+  display: block;
+  margin-top: -8px;
+  margin-bottom: 15px;
+}
+
 /* parties */
+.parties{
+  background-color: var(--color-light-light);
+}
 .parties  .block-medium{
   margin: 1rem auto;
   padding: 5px;
@@ -511,4 +551,46 @@ td{
   width: 100%;
   height: 100%;
   box-shadow: 5px 5px 25px 0px rgba(46, 61, 73, 0.2);
+}
+
+
+/* modal */
+
+
+.modal {
+  display: none; 
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
