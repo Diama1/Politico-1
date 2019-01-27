@@ -528,11 +528,19 @@ td{
 }
 
 .index .card .card-actions{
-  justify-content: space-between;
+  /* justify-content: space-between; */
+}
+.index .card .card-actions #vote{
+  margin-left: 8px;
 }
 .index .card .card-actions .candidates{
   color: #777;
-  margin-right: 35px;
+  margin-left: auto;
+  margin-right: 30px;
+}
+
+.index .card .card-actions:nth-child(2){
+  justify-self: start;
 }
 
 .index form small {
@@ -558,6 +566,14 @@ td{
   border-radius: 40px;
   box-shadow: 5px 5px 25px 0px rgba(46, 61, 73, 0.2);
 
+}
+
+.voted{
+  cursor: not-allowed;
+}
+.voted-for{
+  text-decoration: underline;
+  color: #555;
 }
 
 /* parties */
