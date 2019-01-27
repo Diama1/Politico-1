@@ -146,6 +146,14 @@ body{
     flex: 0 0 100%;
     max-width: 100%;
   }
+
+  .index .block-medium, .parties .block-medium{
+    flex: 0 0 83%;
+    max-width: 83%;
+  }
+  .index .block-medium .candidates{
+    margin-top: 8px;
+  }
 } 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
