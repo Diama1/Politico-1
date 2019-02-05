@@ -1,0 +1,27 @@
+{
+  "name": "Politico",
+  "version": "1.0.0",
+  "description": "Politico enables citizens to give their mandate to politicians running for different government offices while building trust in the process through transparency.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dusmel/Politico.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dusmel/Politico/issues"
+  },
+  "homepage": "https://github.com/dusmel/Politico#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "eslint": "^5.13.0",
+    "jasmine": "^3.3.1"
+  }
+}
