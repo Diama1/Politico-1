@@ -18,6 +18,14 @@ const PoliticalParty = {
     });
   },
 
+  getAll(req,res) {
+    const politicalParties = partyData.getAll();
+    return res.status(200).json({
+      status: 200,
+      data: politicalParties
+    })
+  }
+
 }
 
 module.exports = PoliticalParty;

@@ -29,6 +29,10 @@ class PoliticalParty{
     
   }
 
+  getAll(){
+    return this.politicalParties;
+  }
+
 
 }
 
