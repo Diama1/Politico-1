@@ -14,6 +14,7 @@ const server = app.listen(3000, function(){
 const PoliticalParty = require('./polical_parties');
 
 app.post('/api/v1/parties', PoliticalParty.create);
+app.get('/api/v1/parties', PoliticalParty.getAll);
 
 
 

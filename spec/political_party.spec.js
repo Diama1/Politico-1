@@ -1,4 +1,5 @@
 const Request = require('request');
+const partyData = require('../polical_parties'); 
 
 describe("Political party", () => {
   
@@ -32,4 +33,14 @@ describe("Political party", () => {
       });
     });
   });
+
+  describe('Get all parties', () => {
+    const URL = 'http://localhost:3000/api/v1/parties/';
+    it('should return all parties', (done) => {
+      Request.get(URL,(err,res,body) => {
+        expect(res.statusCode).toEqual(200);
+        done();
+      });
+    });
+  })
 });
