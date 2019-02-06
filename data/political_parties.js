@@ -29,8 +29,12 @@ class PoliticalParty{
     
   }
 
-  getAll(){
+  getAll() {
     return this.politicalParties;
+  }
+
+  getOne(id) {
+    return this.politicalParties.find(party => party.id == id);
   }
 
 
