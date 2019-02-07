@@ -32,6 +32,10 @@ class PoliticalOffice{
     return this.politicalOffices;
   }
 
+  getOne(id) {
+    return this.politicalOffices.find(office => office.id == id);
+  }
+
 
 
 }
