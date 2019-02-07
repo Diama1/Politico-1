@@ -28,8 +28,6 @@ const PoliticalParty = {
   
   getOne(request,res) {
     const politicalParty = partyData.getOne(request.params.id);
-    console.log(request.params);
-    
     if (!politicalParty) {
       return res.status(404).json({
         status: 404,
@@ -41,9 +39,23 @@ const PoliticalParty = {
       status: 200,
       data: politicalParty
     });
-    
-    
-  }
+	},
+	
+	update(req,res) {
+		const politicalParty = partyData.getOne(req.params.id);
+		if (!politicalParty) {
+      return res.status(404).json({
+        status: 404,
+        message: "Party not found"
+      });
+		} 
+		
+		const updatedParty = partyData.update(req.params.id, req.body);
+		return res.status(200).json({
+      status: 200,
+      data: updatedParty
+    });
+	}
 
 };
 

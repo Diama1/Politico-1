@@ -1,5 +1,6 @@
 const moment =  require('moment');
 
+
 class PoliticalParty{
 
 
@@ -35,6 +36,15 @@ class PoliticalParty{
 
   getOne(id) {
     return this.politicalParties.find(party => party.id == id);
+  }
+
+  update(id,body) {
+    const party = this.getOne(id);
+    const index = this.politicalParties.indexOf(party);
+    this.politicalParties[index].name = body["name"] || party.name;
+    this.politicalParties[index].hqAddress = body["hqAddress"] || party.hqAddress;
+    this.politicalParties[index].logoUrl = body["logoUrl"] || party.logoUrl;
+    return this.politicalParties[index];
   }
 
 
