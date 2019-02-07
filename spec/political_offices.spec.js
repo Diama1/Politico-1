@@ -42,6 +42,33 @@ describe('Political party', () => {
 			});
 		});
   });
+
+  describe('Get one party', () => {
+    beforeAll((done) => {
+      Request.post('http://localhost:3000/api/v1/offices/', {json: true, body: data1}, (err,res,body) => {
+        done();
+      });
+    });
+		
+		it('should return a not found', (done) => {
+      const URL = 'http://localhost:3000/api/v1/offices/50';
+			Request.get(URL,(err,res,body) => {
+        expect(res.statusCode).toEqual(404);
+				done();
+			});
+    });
+
+		it('should return a specific office', (done) => {
+      const URL = "http://localhost:3000/api/v1/offices/1";
+			Request.get(URL,(err,res,body) => {
+        body = JSON.parse(body);
+        expect(res.statusCode).toBe(200);
+				done();
+			});
+    });
+    
+
+	});
   
 
 });

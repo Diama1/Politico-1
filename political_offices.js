@@ -25,6 +25,21 @@ const PoliticalOffice = {
 		});
   },
 
+  getOne(request,res) {
+    const politicalOffice = officeData.getOne(request.params.id);
+    if (!politicalOffice) {
+      return res.status(404).json({
+        status: 404,
+        message: "Office not found"
+      });
+    } 
+
+    return res.status(200).json({
+      status: 200,
+      data: politicalOffice
+    });
+	},
+
 
 
 };
