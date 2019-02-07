@@ -47,6 +47,13 @@ class PoliticalParty{
     return this.politicalParties[index];
   }
 
+  delete(id) {
+    const party = this.getOne(id);
+    const index = this.politicalParties.indexOf(party);
+    this.politicalParties.splice(index,1);
+    return {};
+  }
+
 
 }
 

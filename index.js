@@ -17,6 +17,7 @@ app.post('/api/v1/parties', PoliticalParty.create);
 app.get('/api/v1/parties', PoliticalParty.getAll);
 app.get('/api/v1/parties/:id', PoliticalParty.getOne);
 app.put('/api/v1/parties/:id', PoliticalParty.update);
+app.delete('/api/v1/parties/:id', PoliticalParty.delete);
 
 
 
