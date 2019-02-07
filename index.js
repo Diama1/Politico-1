@@ -27,6 +27,7 @@ app.delete('/api/v1/parties/:id', PoliticalParty.delete);
 app.post('/api/v1/offices', PoliticalOffice.create);
 app.get('/api/v1/offices', PoliticalOffice.getAll);
 app.get('/api/v1/offices/:id', PoliticalOffice.getOne);
+app.put('/api/v1/offices/:id', PoliticalOffice.update);
 
 
 

@@ -3,13 +3,17 @@ const Request = require('request');
 
 describe('Political party', () => {
   let error_data = {
-    name: 'OPO',
+    name: 'OPO'
   };
 
   let data1 = {
     type: 'legislative',
-    name: 'Governor',
-    
+    name: 'Governor'
+  };
+
+  let data2 = {
+    type: 'federal',
+    name: 'NAME2',
   };
   
   
@@ -68,6 +72,36 @@ describe('Political party', () => {
     });
     
 
+  });
+  
+  describe("edit a specific office", () => {
+		beforeAll((done) => {
+      Request.post('http://localhost:3000/api/v1/offices/', {json: true, body: data1}, (err,res,body) => {
+        done();
+      });
+    });
+		
+		it('should return a not found', (done) => {
+      const URL = 'http://localhost:3000/api/v1/offices/50';
+			Request.put(URL, {json: true, body: data1}, (err,res,body) => {
+				expect(res.statusCode).toEqual(404);
+				done();
+			});
+		});
+		
+
+		it('should return updated office', (done) => {
+      const URL = "http://localhost:3000/api/v1/offices/1";
+			Request.get(URL,(err,res,body) => {
+				expect(res.statusCode).toBe(200);
+				done();
+        Request.put(URL, {json: true, body: data2}, (err,res,body) =>{
+					expect(res.statusCode).toBe(200);
+					expect(body.data.name).toEqual(data2.name);
+				});
+				done();
+			});
+    });
 	});
   
 
