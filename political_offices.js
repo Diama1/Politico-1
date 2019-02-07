@@ -15,7 +15,15 @@ const PoliticalOffice = {
 			status: 200,
 			data: politicalOffice
 		});
-	},
+  },
+  
+  getAll(req,res) {
+		const politicalOffices = officeData.getAll();
+		return res.status(200).json({
+			status: 200,
+			data: politicalOffices
+		});
+  },
 
 
 

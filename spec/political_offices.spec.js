@@ -32,6 +32,16 @@ describe('Political party', () => {
 			});
 		});
   });
+
+  describe('Get all offices', () => {
+		const URL = 'http://localhost:3000/api/v1/offices/';
+		it('should return all offices', (done) => {
+			Request.get(URL,(err,res,body) => {
+				expect(res.statusCode).toEqual(200);
+				done();
+			});
+		});
+  });
   
 
 });

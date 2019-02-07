@@ -28,6 +28,10 @@ class PoliticalOffice{
     
   }
 
+  getAll() {
+    return this.politicalOffices;
+  }
+
 
 
 }
