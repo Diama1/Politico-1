@@ -36,6 +36,14 @@ class PoliticalOffice{
     return this.politicalOffices.find(office => office.id == id);
   }
 
+  update(id,body) {
+    const office = this.getOne(id);
+    const index = this.politicalOffices.indexOf(office);
+    this.politicalOffices[index].type = body["type"] || office.type;
+    this.politicalOffices[index].name = body["name"] || office.name;
+    return this.politicalOffices[index];
+  }
+
 
 
 }

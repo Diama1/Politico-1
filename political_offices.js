@@ -38,6 +38,22 @@ const PoliticalOffice = {
       status: 200,
       data: politicalOffice
     });
+  },
+  
+  update(req,res) {
+		const politicalOffice = officeData.getOne(req.params.id);
+		if (!politicalOffice) {
+      return res.status(404).json({
+        status: 404,
+        message: "office not found"
+      });
+		} 
+		
+		const updatedOffice = officeData.update(req.params.id, req.body);
+		return res.status(200).json({
+      status: 200,
+      data: updatedOffice
+    });
 	},
 
 
