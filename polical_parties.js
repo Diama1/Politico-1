@@ -55,6 +55,22 @@ const PoliticalParty = {
       status: 200,
       data: updatedParty
     });
+	},
+
+	delete(req, res) {
+		const politicalParty = partyData.getOne(req.params.id);
+		if (!politicalParty) {
+      return res.status(404).json({
+        status: 404,
+        message: "Party not found"
+      });
+		} 
+
+		partyData.delete(req.params.id);
+		return res.status(204).json({
+      status: 204,
+      message: "party deleted"
+    });
 	}
 
 };

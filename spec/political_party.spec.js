@@ -108,6 +108,41 @@ describe('Political party', () => {
 			});
     });
 	});
+
+
+	describe('delete a specific party', () => {
+		const URL = 'http://localhost:3000/api/v1/parties/';
+		let id;
+		beforeAll((done) => {
+      Request.post(URL, {json: true, body: data1}, (err,res,body) => {
+        done();
+      });
+		});
+
+
+		it('should return a specific party', (done) => {
+      const URL = "http://localhost:3000/api/v1/parties/";
+			Request.get(URL,(err,res,body) => {
+        body = JSON.parse(body);
+				expect(res.statusCode).toBe(200);
+				id = body.data[body.data.length - 1].id
+				done();
+			});
+		});
+		
+		it('should delete the specified party', (done) =>{
+			Request.delete(URL+id, (err,res,body) => {
+				expect(res.statusCode).toBe(204);
+				done();
+				Request.get(URL+id,(err,res,body) => {
+					expect(res.statusCode).toBe(404);
+					done();
+				});
+			});
+		});
+		
+
+	});
   
 
 
