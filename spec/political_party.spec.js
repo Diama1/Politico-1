@@ -1,4 +1,5 @@
 const Request = require('request');
+const partyData = require('../data/political_parties.js');
 
 
 describe('Political party', () => {
@@ -7,7 +8,12 @@ describe('Political party', () => {
   };
 
   let data1 = {
-    name: 'OPO',
+    name: 'OPOL',
+    hqAddress: 'KK 23 Ave',
+    logoUrl: 'http://localhost:3000/img/1'
+  };
+  let data2 = {
+    name: 'NAME2',
     hqAddress: 'KK 23 Ave',
     logoUrl: 'http://localhost:3000/img/1'
   };
@@ -46,7 +52,6 @@ describe('Political party', () => {
 
 
 	describe('Get one party', () => {
-
     beforeAll((done) => {
       Request.post('http://localhost:3000/api/v1/parties/', {json: true, body: data1}, (err,res,body) => {
         done();
@@ -66,13 +71,43 @@ describe('Political party', () => {
 			Request.get(URL,(err,res,body) => {
         body = JSON.parse(body);
         expect(res.statusCode).toBe(200);
-        expect(body.data.name).toEqual(data1.name);
 				done();
 			});
     });
     
 
-  });
+	});
+	
+
+	describe("edit a specific party", () => {
+		beforeAll((done) => {
+      Request.post('http://localhost:3000/api/v1/parties/', {json: true, body: data1}, (err,res,body) => {
+        done();
+      });
+    });
+		
+		it('should return a not found', (done) => {
+      const URL = 'http://localhost:3000/api/v1/parties/50';
+			Request.put(URL, {json: true, body: data1}, (err,res,body) => {
+				expect(res.statusCode).toEqual(404);
+				done();
+			});
+		});
+		
+
+		it('should return updated party', (done) => {
+      const URL = "http://localhost:3000/api/v1/parties/1";
+			Request.get(URL,(err,res,body) => {
+				expect(res.statusCode).toBe(200);
+				done();
+        Request.put(URL, {json: true, body: data2}, (err,res,body) =>{
+					expect(res.statusCode).toBe(200);
+					expect(body.data.name).toEqual(data2.name);
+				});
+				done();
+			});
+    });
+	});
   
 
 
