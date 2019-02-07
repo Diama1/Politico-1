@@ -54,7 +54,23 @@ const PoliticalOffice = {
       status: 200,
       data: updatedOffice
     });
-	},
+  },
+  
+  delete(req, res) {
+		const politicalOffice = officeData.getOne(req.params.id);
+		if (!politicalOffice) {
+      return res.status(404).json({
+        status: 404,
+        message: "office not found"
+      });
+		} 
+
+		officeData.delete(req.params.id);
+		return res.status(204).json({
+      status: 204,
+      message: "office deleted"
+    });
+	}
 
 
 

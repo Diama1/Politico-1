@@ -47,7 +47,7 @@ describe('Political party', () => {
 		});
   });
 
-  describe('Get one party', () => {
+  describe('Get one office', () => {
     beforeAll((done) => {
       Request.post('http://localhost:3000/api/v1/offices/', {json: true, body: data1}, (err,res,body) => {
         done();
@@ -102,6 +102,31 @@ describe('Political party', () => {
 				done();
 			});
     });
+  });
+  
+  describe('delete a specific office', () => {
+		const URL = 'http://localhost:3000/api/v1/offices/';
+		let id = 0;
+		beforeAll((done) => {
+      Request.post(URL, {json: true, body: data1}, (err,res,body) => {
+				id = body.data.id;
+        done();
+      });
+		});
+
+		
+		it('should delete the specified office', (done) =>{
+			Request.delete(URL+id, (err,res,body) => {
+				expect(res.statusCode).toBe(204);
+				done();
+				Request.get(URL+id,(err,res,body) => {
+					expect(res.statusCode).toBe(404);
+					done();
+				});
+			});
+		});
+		
+
 	});
   
 

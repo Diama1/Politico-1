@@ -115,8 +115,6 @@ describe('Political party', () => {
 		let id = 0;
 		beforeAll((done) => {
       Request.post(URL, {json: true, body: data1}, (err,res,body) => {
-				console.log(body.data.id);
-				
 				id = body.data.id;
         done();
       });
