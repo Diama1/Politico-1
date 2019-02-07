@@ -112,23 +112,31 @@ describe('Political party', () => {
 
 	describe('delete a specific party', () => {
 		const URL = 'http://localhost:3000/api/v1/parties/';
-		let id;
+		let id = 0;
 		beforeAll((done) => {
       Request.post(URL, {json: true, body: data1}, (err,res,body) => {
+				console.log(body.data.id);
+				
+				id = body.data.id;
         done();
       });
 		});
 
 
-		it('should return a specific party', (done) => {
-      const URL = "http://localhost:3000/api/v1/parties/";
-			Request.get(URL,(err,res,body) => {
-        body = JSON.parse(body);
-				expect(res.statusCode).toBe(200);
-				id = body.data[body.data.length - 1].id
-				done();
-			});
-		});
+		// it('should return a specific party', (done) => {
+    //   const URL = "http://localhost:3000/api/v1/parties/";
+		// 	Request.get(URL,(err,res,body) => {
+		// 		console.log(URL+id);
+		// 		console.log(body);
+				
+    //     body = JSON.parse(body);
+		// 		expect(res.statusCode).toBe(200);
+				
+		// 		done();
+		// 	});
+		// 	console.log("##done");
+			
+		// });
 		
 		it('should delete the specified party', (done) =>{
 			Request.delete(URL+id, (err,res,body) => {
