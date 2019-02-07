@@ -44,6 +44,13 @@ class PoliticalOffice{
     return this.politicalOffices[index];
   }
 
+  delete(id) {
+    const office = this.getOne(id);
+    const index = this.politicalOffices.indexOf(office);
+    this.politicalOffices.splice(index,1);
+    return {};
+  }
+
 
 
 }
