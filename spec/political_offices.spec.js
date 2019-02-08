@@ -1,7 +1,9 @@
 const Request = require('request');
+const server = require('../index');
+
+describe('Political Office', () => {
 
 
-describe('Political party', () => {
   let error_data = {
     name: 'OPO'
   };

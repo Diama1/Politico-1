@@ -1,5 +1,6 @@
 const Request = require('request');
 const partyData = require('../data/political_parties.js');
+const server = require('../index');
 
 
 describe('Political party', () => {

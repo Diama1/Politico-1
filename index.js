@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
 	res.status(200).send('Welcome to POLITICO');
 });
 
-const server = app.listen(3000, function(){
+app.listen(3000, function(){
 	console.log('Listening on port 3000...');
 });
 
@@ -33,4 +33,4 @@ app.delete('/api/v1/offices/:id', PoliticalOffice.delete);
 
 
 
-module.exports = server;
+module.exports = app;
