@@ -2,6 +2,7 @@
  Politico enables citizens to give their mandate to politicians running for different government offices while building trust in the process through transparency.
 
 [![Build Status](https://travis-ci.org/dusmel/Politico.svg?branch=develop)](https://travis-ci.org/dusmel/Politico) 
+[![Coverage Status](https://coveralls.io/repos/github/dusmel/Politico/badge.svg?branch=chore-integrate-coveralls-163848508)](https://coveralls.io/github/dusmel/Politico?branch=chore-integrate-coveralls-163848508)
 ## Features
 
  - Users can sign up. Users can login. 
