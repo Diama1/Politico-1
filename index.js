@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
 	res.status(200).send('Welcome to POLITICO');
 });
 
-app.listen(3000, function(){
+app.listen(process.env.PORT || 4000, function(){
 	console.log('Listening on port 3000...');
 });
 
