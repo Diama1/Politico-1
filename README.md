@@ -1,6 +1,7 @@
 ## Politico
  Politico enables citizens to give their mandate to politicians running for different government offices while building trust in the process through transparency.
 
+[![Build Status](https://travis-ci.org/dusmel/Politico.svg?branch=develop)](https://travis-ci.org/dusmel/Politico) 
 ## Features
 
  - Users can sign up. Users can login. 
