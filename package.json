@@ -4,8 +4,9 @@
   "description": "Politico enables citizens to give their mandate to politicians running for different government offices while building trust in the process through transparency.",
   "main": "index.js",
   "scripts": {
-    "test": "jasmine",
-    "start": "node index.js"
+    "test": "nyc jasmine",
+    "start": "node index.js",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,9 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
+    "coveralls": "^3.0.2",
     "eslint": "^5.13.0",
-    "jasmine": "^3.3.1"
+    "jasmine": "^3.3.1",
+    "nyc": "^13.2.0"
   }
 }
