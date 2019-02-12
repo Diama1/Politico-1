@@ -15,9 +15,16 @@ body{
   margin: 0;
   color: var(--color-dark);
 
+  
+
   font-family: "nunito";
 }
 
+
+@font-face {
+  font-family: "product-sans";
+  src: url("../webfonts/ProductSans-Regular.woff");
+}
 
 .block-large{
   flex: 0 0 83%;
@@ -26,6 +33,10 @@ body{
 .block-medium{
   flex: 0 0 58%;
   max-width: 58%;
+}
+.block-half{
+  flex: 0 0 50%;
+  max-width: 50%;
 }
 .block-small{
   flex: 0 0 33%;
@@ -153,6 +164,21 @@ body{
   }
   .index .block-medium .candidates{
     margin-top: 8px;
+  }
+
+  .landing .landing-text h3{
+    font-size: 2rem !important;
+    line-height: 39px  !important;
+  }
+
+  .landing .landing-image{
+    display: none;
+  }
+
+
+  .block-half{
+    flex: 0 0 95%;
+    max-width: 95%;
   }
 } 
 
@@ -644,4 +670,56 @@ td{
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+
+/* -------------------- landing ---------------------------- */
+
+.landing{
+  height: calc(100vh);
+  padding-bottom: 2rem;
+}
+.landing .wrapper{
+  height: 100%;
+}
+.landing-image{
+  background-image: url("../images/landing-page.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.landing h2{
+  font-family: "product-sans";
+  letter-spacing: 1.8px;
+  font-size: 38px;
+  margin-left: 2rem;
+}
+
+.landing .landing-text{
+  margin-top: 4rem;
+  padding: 0 3rem 2rem 3rem;
+}
+.landing .landing-text h3{
+  font-size: 2rem;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 62px;
+  letter-spacing: -2px;
+  color: var(--color-secondary-dark);
+}
+
+
+.landing .landing-text p{
+  color: #777;
+  margin-top: -2rem;
+  margin-bottom: 3rem;
+}
+
+.landing .button-landing{
+  padding: 10px 12px;
+  border-radius: 6px;
+  background-image: linear-gradient(var(--color-secondary-dark), var(--color-primary));
+  color: var(--color-light);
+  text-decoration: none;
+  font-weight: 600;
 }

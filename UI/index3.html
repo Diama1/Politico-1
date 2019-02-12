@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Politico</title>
+
+  <!-- fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/all.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="index">
+  <nav class="navbar">
+    <a class="navbar-logo " href="index.html">Politico</a> 
+    <button class="bars " onclick="showMenu()"  ><i class="fa fa-align-right"></i></button>
+    <ul id="menu" class="">
+      <li><a href="#" class="active">Home</a></li>
+      <li><a href="my-votes.html">My votes</a></li>
+      <li><a href="political-party-index.html">admin</a></li>
+      <li><a href="parties.html">Parties</a></li>
+      <li><a href="signup.html" class="button button-register">Register</a></li>
+    </ul>
+  </nav>
+
+  <div class="wrapper ">
+    <div class="block block-medium">
+      <div class="card">
+        <h3>Government Office</h3>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit
+            oluptate molestias tempora doloribus error itaque sint alias r
+            epellat mollitia asperiores.</p>
+        <div class="wrapper card-actions">
+          <a href="#" id="run-office" class="button button-notice-fill">Run for this office</a>
+          <a href="#" class="button button-notice-fill" id="vote">Vote <i class="fas fa-vote-yea"></i></a>
+          <a href="#" class="candidates" id="show-candidates">6 candidates</a>
+          
+        </div>
+      </div>
+      <div class="card">
+        <h3>Government Office</h3>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit
+            oluptate molestias tempora doloribus error itaque sint alias r
+            epellat mollitia asperiores.</p>
+        <div class="wrapper card-actions">
+          <a href="#" id="run-office1" class="button button-notice-fill">Run for this office</a>
+          <a href="#" class="voted button button-alert-fill" id="vote">Voted <i class="fas fa-vote-yea"></i></a>
+          <a href="#" class="candidates" id="show-candidates1">6 candidates</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Government Office</h3>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit
+            oluptate molestias tempora doloribus error itaque sint alias r
+            epellat mollitia asperiores.</p>
+        <div class="wrapper card-actions">
+          <a href="#" id="run-office" class="button button-notice-fill">Run for this office</a>
+          <a href="#" class="candidates" id="show-candidates">6 candidates</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Government Office</h3>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit
+            oluptate molestias tempora doloribus error itaque sint alias r
+            epellat mollitia asperiores.</p>
+        <div class="wrapper card-actions">
+          <a href="#" id="run-office1" class="button button-notice-fill">Run for this office</a>
+          <a href="#" class="candidates" id="show-candidates1">6 candidates</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Government Office</h3>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit
+            oluptate molestias tempora doloribus error itaque sint alias r
+            epellat mollitia asperiores.</p>
+        <div class="wrapper card-actions">
+          <a href="#" id="run-office" class="button button-notice-fill">Run for this office</a>
+          <a href="#" class="candidates" id="show-candidates">6 candidates</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Government Office</h3>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit
+            oluptate molestias tempora doloribus error itaque sint alias r
+            epellat mollitia asperiores.</p>
+        <div class="wrapper card-actions">
+          <a href="#" id="run-office1" class="button button-notice-fill">Run for this office</a>
+          <a href="#" class="candidates" id="show-candidates1">6 candidates</a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+
+
+
+  <!-- The Modal Office -->
+  <div id="runOffice" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" id="close-office">&times;</span>
+        <div class="wrapper">
+          <div class="block block-large">
+            <h3>Run for Office Title</h3>
+            <form action="post">
+              <label for="">Full name</label>
+              <input type="text" name="name" id="">
+              <small>* name on your identification</small>
+
+              <label for="">Identification Number</label>
+              <input type="text" name="id-number" id="id-number">
+
+              <a href="#" class="button button-notice-fill">Confirm</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- The Modal vote -->
+  <div id="modal-vote" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" id="close-vote">&times;</span>
+        <div class="wrapper">
+          <div class="block block-large">
+            <h3>Office Title</h3>
+            <form action="post">
+              <label for="">Select candidate name</label>
+              <select name="" id="">
+                <option value="">Full name</option>
+                <option value="">Full name</option>
+                <option value="">Full name</option>
+                <option value="">Full name</option>
+              </select>
+
+              
+
+              <a href="#" class="button button-notice-fill">Confirm</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- The Modal Candidates -->
+    <div id="officeCandidates" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" id="close-candidates">&times;</span>
+        <div class="wrapper">
+          <div class="block block-large">
+            <h3>Candidates for this Office</h3>
+            <div class="wrapper candidate">
+              <div class="avatar">
+                <img src="http://i.pravatar.cc/300" alt="avatar">
+              </div>
+              <h4>Candidate Name</h4>
+            </div>
+            <div class="wrapper candidate">
+              <div class="avatar">
+                <img src="http://i.pravatar.cc/300" alt="avatar">
+              </div>
+              <h4>Candidate Name</h4>
+            </div>
+            <div class="wrapper candidate">
+              <div class="avatar">
+                <img src="http://i.pravatar.cc/300" alt="avatar">
+              </div>
+              <h4>Candidate Name</h4>
+            </div>
+            <div class="wrapper candidate">
+              <div class="avatar">
+                <img src="http://i.pravatar.cc/300" alt="avatar">
+              </div>
+              <h4>Candidate Name</h4>
+            </div>
+            <div class="wrapper candidate">
+              <div class="avatar">
+                <img src="http://i.pravatar.cc/300" alt="avatar">
+              </div>
+              <h4>Candidate Name</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<script src="javascript/script.js"></script>
+</body>
+</html>
