@@ -732,3 +732,31 @@ td{
 .user  #run-office{
   display: none !important;
 }
+
+
+
+/* ----------------- footer --------------------------------- */
+/* .reset{
+  height: calc(100vh -180px);
+} */
+
+footer{
+  background: var(--color-dark);
+  color: var(--color-light-light);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+footer .wrapper{
+  padding: 1rem 3rem;
+  justify-content: space-around;
+}
+
+footer ul{
+  list-style: none;
+}
+footer ul li{
+  padding: 4px 0;
+}
