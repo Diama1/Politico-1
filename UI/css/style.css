@@ -338,6 +338,10 @@ input[type=text],input[type=email], input[type=password], textarea, select {
   max-width: 83%;
   margin: 4rem auto;
 }
+
+.admin .body .block-large{
+  margin: 0 auto;
+}
 .admin .block-medium{
   flex: 0 0 58%;
   max-width: 58%;
@@ -428,6 +432,7 @@ input[type=text],input[type=email], input[type=password], textarea, select {
   right: 2%;
   top: 71px;
   border: 2px solid #dfd8d9;
+  z-index: 10;
 }
 
 .navbar .menu-profile ul li{
@@ -722,4 +727,8 @@ td{
   color: var(--color-light);
   text-decoration: none;
   font-weight: 600;
+}
+
+.user  #run-office{
+  display: none !important;
 }
