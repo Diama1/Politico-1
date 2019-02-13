@@ -1,33 +1,29 @@
-const moment =  require('moment');
+const moment = require('moment');
 
 
-class PoliticalParty{
-
-
-
+class PoliticalParty {
   constructor() {
     this.politicalParties = [];
   }
 
 
   create(data) {
-    let partyLength = this.politicalParties.length;
+    const partyLength = this.politicalParties.length;
     let id = partyLength + 1;
 
-    if(this.politicalParties.find(party => party.id === id)){
-      id = this.politicalParties[partyLength-1].id + 1;
+    if (this.politicalParties.find(party => party.id === id)) {
+      id = this.politicalParties[partyLength - 1].id + 1;
     }
-    
+
     const newPoliticalParty = {
-      id: id,
+      id,
       name: data.name || '',
       hqAddress: data.hqAddress || '',
       logoUrl: data.logoUrl || '',
-      createdDate: moment.now()
+      createdDate: moment.now(),
     };
     this.politicalParties.push(newPoliticalParty);
     return newPoliticalParty;
-    
   }
 
   getAll() {
@@ -35,27 +31,25 @@ class PoliticalParty{
   }
 
   getOne(id) {
-    return this.politicalParties.find(party => party.id == id);
+    return this.politicalParties.find(party => party.id === parseInt(id, 10));
   }
 
-  update(id,body) {
+  update(id, body) {
     const party = this.getOne(id);
     const index = this.politicalParties.indexOf(party);
-    this.politicalParties[index].name = body["name"] || party.name;
-    this.politicalParties[index].hqAddress = body["hqAddress"] || party.hqAddress;
-    this.politicalParties[index].logoUrl = body["logoUrl"] || party.logoUrl;
+    this.politicalParties[index].name = body.name || party.name;
+    this.politicalParties[index].hqAddress = body.hqAddress || party.hqAddress;
+    this.politicalParties[index].logoUrl = body.logoUrl || party.logoUrl;
     return this.politicalParties[index];
   }
 
   delete(id) {
     const party = this.getOne(id);
     const index = this.politicalParties.indexOf(party);
-    this.politicalParties.splice(index,1);
+    this.politicalParties.splice(index, 1);
     return {};
   }
-
-
 }
 
 
-export default new  PoliticalParty();
+export default new PoliticalParty();

@@ -1,31 +1,27 @@
-const moment =  require('moment');
+const moment = require('moment');
 
 
-class PoliticalOffice{
-
-
-
+class PoliticalOffice {
   constructor() {
     this.politicalOffices = [];
   }
 
   create(data) {
-    let officeLength = this.politicalOffices.length;
+    const officeLength = this.politicalOffices.length;
     let id = officeLength + 1;
 
-    if(this.politicalOffices.find(office => office.id === id)){
-      id = this.politicalOffices[officeLength-1].id + 1;
+    if (this.politicalOffices.find(office => office.id === id)) {
+      id = this.politicalOffices[officeLength - 1].id + 1;
     }
-    
+
     const newPoliticalOffice = {
-      id: id,
+      id,
       type: data.type || '',
       name: data.name || '',
-      createdDate: moment.now()
+      createdDate: moment.now(),
     };
     this.politicalOffices.push(newPoliticalOffice);
     return newPoliticalOffice;
-    
   }
 
   getAll() {
@@ -33,27 +29,24 @@ class PoliticalOffice{
   }
 
   getOne(id) {
-    return this.politicalOffices.find(office => office.id == id);
+    return this.politicalOffices.find(office => office.id === parseInt(id, 10));
   }
 
-  update(id,body) {
+  update(id, body) {
     const office = this.getOne(id);
     const index = this.politicalOffices.indexOf(office);
-    this.politicalOffices[index].type = body["type"] || office.type;
-    this.politicalOffices[index].name = body["name"] || office.name;
+    this.politicalOffices[index].type = body.type || office.type;
+    this.politicalOffices[index].name = body.name || office.name;
     return this.politicalOffices[index];
   }
 
   delete(id) {
     const office = this.getOne(id);
     const index = this.politicalOffices.indexOf(office);
-    this.politicalOffices.splice(index,1);
+    this.politicalOffices.splice(index, 1);
     return {};
   }
-
-
-
 }
 
 
-export default new  PoliticalOffice();
+export default new PoliticalOffice();
