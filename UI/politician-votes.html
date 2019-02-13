@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Politico</title>
+
+  <!-- fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/all.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="index">
+  <nav class="navbar">
+    <a class="navbar-logo " href="#">Politico</a> 
+    <button class="bars " onclick="showMenu()"  ><i class="fa fa-align-right"></i></button>
+    <ul id="menu" class="">
+      <li class="profile-dropdown">
+        <a onclick="showProfile()" class="button-nav-profile" id="dropdown-btn">Admin <i class="fas fa-angle-down" ></i></a>
+        <div class="menu-profile" id="menu-profile">
+          <ul>
+            <li><a href="#">My votes</a></li>
+            <li><a href="politician-offices.html">Offices</a></li>
+            <li><a href="login.html">Logout</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+
+  <div class="wrapper admin ">
+    <div class=" block-large block">
+      <div class="wrapper">
+        <div class="block block-small tab">
+          <ul>
+            <li>Politician</li>
+            <li ><a href="politician-offices.html">Political Offices</a></li>
+            <li class="active"><a href="politician-votes.html">My votes</a></li>
+          </ul>
+        </div>
+        <div class=" block block-medium content">
+          <div class="header">
+            <h3>My Votes</h5>
+          </div>
+          <div class="body">
+            <div class="wrapper ">
+                <div class="block block-large">
+                  <div class="card">
+                    <h3>governor Office</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit
+                        oluptate molestias tempora doloribus error itaque sint alias r
+                        epellat mollitia asperiores.</p>
+                    <div class="wrapper card-actions">
+                      <a href="#" class="voted button button-alert-fill" id="vote">Voted <i class="fas fa-vote-yea"></i></a>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <h3>Mayor Office</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit
+                        oluptate molestias tempora doloribus error itaque sint alias r
+                        epellat mollitia asperiores.</p>
+                    <div class="wrapper card-actions">
+                      <a href="#" class="voted button button-alert-fill" id="vote">Voted <i class="fas fa-vote-yea"></i></a>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <h3>Senator Office</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit
+                        oluptate molestias tempora doloribus error itaque sint alias r
+                        epellat mollitia asperiores.</p>
+                    <div class="wrapper card-actions">
+                      <a href="#" class="voted button button-alert-fill" id="vote">Voted <i class="fas fa-vote-yea"></i></a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- The Modal Candidates -->
+            <div id="officeCandidates" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <span class="close" id="close-candidates">&times;</span>
+                  <div class="wrapper">
+                    <div class="block block-large">
+                      <h3>Candidates for this Office</h3>
+                      <div class="wrapper candidate">
+                        <div class="avatar">
+                          <img src="http://i.pravatar.cc/300" alt="avatar">
+                        </div>
+                        <h4>Candidate Name</h4>
+                      </div>
+                      <div class="wrapper candidate">
+                        <div class="avatar">
+                          <img src="http://i.pravatar.cc/300" alt="avatar">
+                        </div>
+                        <h4>Candidate Name</h4>
+                      </div>
+                      <div class="wrapper candidate">
+                        <div class="avatar">
+                          <img src="http://i.pravatar.cc/300" alt="avatar">
+                        </div>
+                        <h4>Candidate Name</h4>
+                      </div>
+                      <div class="wrapper candidate">
+                        <div class="avatar">
+                          <img src="http://i.pravatar.cc/300" alt="avatar">
+                        </div>
+                        <h4>Candidate Name</h4>
+                      </div>
+                      <div class="wrapper candidate">
+                        <div class="avatar">
+                          <img src="http://i.pravatar.cc/300" alt="avatar">
+                        </div>
+                        <h4>Candidate Name</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script src="javascript/script.js"></script>
+</body>
+</html>
