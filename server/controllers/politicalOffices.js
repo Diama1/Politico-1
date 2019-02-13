@@ -1,4 +1,4 @@
-const officeData = require('./data/political_offices');
+import officeData from '../models/politicalOffices';
 
 
 const PoliticalOffice = {
@@ -76,4 +76,4 @@ const PoliticalOffice = {
 
 };
 
-module.exports = PoliticalOffice;
+export default PoliticalOffice;

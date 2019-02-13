@@ -56,4 +56,4 @@ class PoliticalOffice{
 }
 
 
-module.exports = new  PoliticalOffice();
+export default new  PoliticalOffice();

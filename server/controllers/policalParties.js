@@ -1,5 +1,5 @@
 
-const partyData = require('./data/political_parties'); 
+import partyData from '../models/politicalParties'; 
 
 
 const PoliticalParty = {
@@ -75,4 +75,4 @@ const PoliticalParty = {
 
 };
 
-module.exports = PoliticalParty;
+export default PoliticalParty;

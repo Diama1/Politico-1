@@ -1,7 +1,7 @@
-const express = require('express');
+import express from 'express';
 const app = express();
-const PoliticalParty = require('./polical_parties');
-const PoliticalOffice = require('./political_offices');
+import PoliticalParty from  './server/controllers/policalParties';
+import PoliticalOffice from './server/controllers/politicalOffices';
 
 app.use(express.json());
 
@@ -10,8 +10,8 @@ app.get('/', (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, function(){
-	console.log('Listening on port 3000...');
+app.listen(port, () => {
+	console.log('Listening on port ${port}...');
 });
 
 
@@ -34,4 +34,4 @@ app.delete('/api/v1/offices/:id', PoliticalOffice.delete);
 
 
 
-module.exports = app;
+export default app;

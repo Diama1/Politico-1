@@ -1,27 +1,27 @@
-const Request = require('request');
-const partyData = require('../data/political_parties.js');
-const server = require('../index');
+import Request from 'request';
+import server from '../../index.js';
+
+describe('Political Office', () => {
 
 
-describe('Political party', () => {
   let error_data = {
-    name: 'OPO',
+    name: 'OPO'
   };
 
   let data1 = {
-    name: 'OPOL',
-    hqAddress: 'KK 23 Ave',
-    logoUrl: 'http://localhost:3000/img/1'
+    type: 'legislative',
+    name: 'Governor'
   };
+
   let data2 = {
+    type: 'federal',
     name: 'NAME2',
-    hqAddress: 'KK 23 Ave',
-    logoUrl: 'http://localhost:3000/img/1'
   };
   
+  
 
-	describe('Create party', () => {
-		const URL = 'http://localhost:3000/api/v1/parties/';
+	describe('Create office', () => {
+		const URL = 'http://localhost:3000/api/v1/offices/';
 		it('should return a status code of 404 and error_message on error', (done) => {
 			Request.post(URL, {json: true, body: error_data}, (err,res,body) => {
 				expect(res.statusCode).toBe(404);
@@ -38,12 +38,10 @@ describe('Political party', () => {
 			});
 		});
   });
-  
 
-
-	describe('Get all parties', () => {
-		const URL = 'http://localhost:3000/api/v1/parties/';
-		it('should return all parties', (done) => {
+  describe('Get all offices', () => {
+		const URL = 'http://localhost:3000/api/v1/offices/';
+		it('should return all offices', (done) => {
 			Request.get(URL,(err,res,body) => {
 				expect(res.statusCode).toEqual(200);
 				done();
@@ -51,24 +49,23 @@ describe('Political party', () => {
 		});
   });
 
-
-	describe('Get one party', () => {
+  describe('Get one office', () => {
     beforeAll((done) => {
-      Request.post('http://localhost:3000/api/v1/parties/', {json: true, body: data1}, (err,res,body) => {
+      Request.post('http://localhost:3000/api/v1/offices/', {json: true, body: data1}, (err,res,body) => {
         done();
       });
     });
 		
 		it('should return a not found', (done) => {
-      const URL = 'http://localhost:3000/api/v1/parties/50';
+      const URL = 'http://localhost:3000/api/v1/offices/50';
 			Request.get(URL,(err,res,body) => {
         expect(res.statusCode).toEqual(404);
 				done();
 			});
     });
 
-		it('should return a specific party', (done) => {
-      const URL = "http://localhost:3000/api/v1/parties/1";
+		it('should return a specific office', (done) => {
+      const URL = "http://localhost:3000/api/v1/offices/1";
 			Request.get(URL,(err,res,body) => {
         body = JSON.parse(body);
         expect(res.statusCode).toBe(200);
@@ -77,18 +74,17 @@ describe('Political party', () => {
     });
     
 
-	});
-	
-
-	describe("edit a specific party", () => {
+  });
+  
+  describe("edit a specific office", () => {
 		beforeAll((done) => {
-      Request.post('http://localhost:3000/api/v1/parties/', {json: true, body: data1}, (err,res,body) => {
+      Request.post('http://localhost:3000/api/v1/offices/', {json: true, body: data1}, (err,res,body) => {
         done();
       });
     });
 		
 		it('should return a not found', (done) => {
-      const URL = 'http://localhost:3000/api/v1/parties/50';
+      const URL = 'http://localhost:3000/api/v1/offices/50';
 			Request.put(URL, {json: true, body: data1}, (err,res,body) => {
 				expect(res.statusCode).toEqual(404);
 				done();
@@ -96,8 +92,8 @@ describe('Political party', () => {
 		});
 		
 
-		it('should return updated party', (done) => {
-      const URL = "http://localhost:3000/api/v1/parties/1";
+		it('should return updated office', (done) => {
+      const URL = "http://localhost:3000/api/v1/offices/1";
 			Request.get(URL,(err,res,body) => {
 				expect(res.statusCode).toBe(200);
 				done();
@@ -108,11 +104,10 @@ describe('Political party', () => {
 				done();
 			});
     });
-	});
-
-
-	describe('delete a specific party', () => {
-		const URL = 'http://localhost:3000/api/v1/parties/';
+  });
+  
+  describe('delete a specific office', () => {
+		const URL = 'http://localhost:3000/api/v1/offices/';
 		let id = 0;
 		beforeAll((done) => {
       Request.post(URL, {json: true, body: data1}, (err,res,body) => {
@@ -121,23 +116,8 @@ describe('Political party', () => {
       });
 		});
 
-
-		// it('should return a specific party', (done) => {
-    //   const URL = "http://localhost:3000/api/v1/parties/";
-		// 	Request.get(URL,(err,res,body) => {
-		// 		console.log(URL+id);
-		// 		console.log(body);
-				
-    //     body = JSON.parse(body);
-		// 		expect(res.statusCode).toBe(200);
-				
-		// 		done();
-		// 	});
-		// 	console.log("##done");
-			
-		// });
 		
-		it('should delete the specified party', (done) =>{
+		it('should delete the specified office', (done) =>{
 			Request.delete(URL+id, (err,res,body) => {
 				expect(res.statusCode).toBe(204);
 				done();
@@ -151,8 +131,5 @@ describe('Political party', () => {
 
 	});
   
-
-
-
 
 });

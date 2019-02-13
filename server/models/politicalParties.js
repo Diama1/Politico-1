@@ -58,4 +58,4 @@ class PoliticalParty{
 }
 
 
-module.exports = new  PoliticalParty();
+export default new  PoliticalParty();
