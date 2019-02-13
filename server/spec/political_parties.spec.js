@@ -87,7 +87,7 @@ describe('Political party', () => {
 
     it('should return a not found', (done) => {
       const URL = 'http://localhost:3000/api/v1/parties/50';
-      Request.put(URL, { json: true, body: data1 }, (err, res, body) => {
+      Request.patch(URL, { json: true, body: data1 }, (err, res, body) => {
         expect(res.statusCode).toEqual(404);
         done();
       });
@@ -99,7 +99,7 @@ describe('Political party', () => {
       Request.get(URL, (err, res, body) => {
         expect(res.statusCode).toBe(200);
         done();
-        Request.put(URL, { json: true, body: data2 }, (err, res, body) => {
+        Request.patch(URL, { json: true, body: data2 }, (err, res, body) => {
           expect(res.statusCode).toBe(200);
           expect(body.data.name).toEqual(data2.name);
         });
