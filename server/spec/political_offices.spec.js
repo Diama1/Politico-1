@@ -30,6 +30,7 @@ describe('Political Office endpoint', () => {
     it('should retun a status code of 201 when a new office was created', (done) => {
       Request.post(URL, { json: true, body: data1 }, (err, res, body) => {
         expect(res.statusCode).toBe(201);
+        expect(typeof(body.data)).toBe('object');
         expect(body.data.name).toMatch(data1.name);
         done();
       });
@@ -41,6 +42,8 @@ describe('Political Office endpoint', () => {
     it('should return a status of 200 when request succeded', (done) => {
       Request.get(URL, (err, res, body) => {
         expect(res.statusCode).toEqual(200);
+        body = JSON.parse(body);
+        expect(Array.isArray(body.data)).toBe(true);
         done();
       });
     });
@@ -66,6 +69,7 @@ describe('Political Office endpoint', () => {
       Request.get(URL, (err, res, body) => {
         body = JSON.parse(body);
         expect(res.statusCode).toBe(200);
+        expect(typeof(body.data)).toBe('object');
         done();
       });
     });
@@ -94,6 +98,7 @@ describe('Political Office endpoint', () => {
         done();
         Request.patch(URL, { json: true, body: data2 }, (err, res, body) => {
           expect(res.statusCode).toBe(200);
+          expect(typeof(body.data)).toBe('object');
           expect(body.data.name).toEqual(data2.name);
         });
         done();
