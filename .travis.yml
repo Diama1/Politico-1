@@ -3,4 +3,5 @@ node_js:
   - "8.15.0"
 script:
   - npx eslint server
+  - npm test
 after_success: npm run coverage
