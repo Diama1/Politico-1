@@ -364,14 +364,17 @@ input[type=text],input[type=email], input[type=password], textarea, select {
 }
 
 .admin .tab ul li{
-  padding: 8px 15px;
-  /* background-color: var(--color-light); */
   border-bottom: 2px solid #dfd8d9;
+}
+.admin .tab ul li:first-child{
+  padding: 8px 15px;
 }
 
 .admin .tab ul li a {
   color: #444;
   text-decoration: none;
+  display: block;
+  padding: 8px 15px;
 }
 
 .admin .tab ul li:last-child{
