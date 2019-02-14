@@ -1,11 +1,10 @@
-
 import partyData from '../models/politicalParties';
-
+import validate from '../helpers/partiesValidate';
 
 const PoliticalParty = {
 
   create(req, res) {
-    if (!req.body.name || !req.body.hqAddress || !req.body.logoUrl) {
+    if (validate.create(req.body) === false) {
       return res.status(400).json({
         status: 400,
         error: 'All fields are required',
@@ -47,6 +46,12 @@ const PoliticalParty = {
       return res.status(404).json({
         status: 404,
         message: 'Party not found',
+      });
+    }
+    if (validate.edit(req.body) === false) {
+      return res.status(400).json({
+        status: 400,
+        message: 'Format not accepted',
       });
     }
 
