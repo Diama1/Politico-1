@@ -1,20 +1,19 @@
 import officeData from '../models/politicalOffices';
-import validate from '../helpers/officesValidate';
 
 
 const PoliticalOffice = {
 
   create(req, res) {
-    if (validate.create(req.body) === false) {
+    const politicalOffice = officeData.create(req.body);
+    if (!politicalOffice.status) {
       return res.status(400).json({
         status: 400,
-        error: 'All fields are required',
+        message: politicalOffice.message,
       });
     }
-    const politicalOffice = officeData.create(req.body);
     return res.status(201).json({
       status: 201,
-      data: politicalOffice,
+      data: politicalOffice.data,
     });
   },
 
@@ -49,17 +48,16 @@ const PoliticalOffice = {
         message: 'office not found',
       });
     }
-    if (validate.edit(req.body) === false) {
+    const updatedOffice = officeData.update(req.params.id, req.body);
+    if (!updatedOffice.status) {
       return res.status(400).json({
         status: 400,
-        message: 'Format not allowed',
+        message: updatedOffice.message,
       });
     }
-
-    const updatedOffice = officeData.update(req.params.id, req.body);
     return res.status(200).json({
       status: 200,
-      data: updatedOffice,
+      data: updatedOffice.data,
     });
   },
 

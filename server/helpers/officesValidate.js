@@ -1,54 +1,45 @@
-
+import Joi from 'joi';
 
 const validate = {
 
-  create(body) {
-    function checkName(name) {
-      if (!name || name.trim().length === 0) {
-        return false;
-      }
-      return true;
+  create(req, res, next) {
+    const schema = {
+      name: Joi.string().trim().required(),
+      type: Joi.string().trim().valid([
+        'federal',
+        'legislative',
+        'state',
+        'local government',
+      ]).required(),
+    };
+    const result = Joi.validate(req.body, schema);
+    if (result.error) {
+      return res.status(400).json({
+        status: 400,
+        message: result.error.details[0].message,
+      });
     }
-    function checkType(type) {
-      if (!type || type.trim().length === 0) {
-        return false;
-      }
-      return true;
-    }
-
-
-    if (checkName(body.name) && checkType(body.type)) {
-      return true;
-    }
-
-    return false;
+    return next();
   },
 
-  edit(body) {
-    function checkName(name) {
-      if (typeof (name) === 'undefined') {
-        return true;
-      }
-      if (name && name.trim().length !== 0) {
-        return true;
-      }
-      return false;
+  edit(req, res, next) {
+    const schema = {
+      name: Joi.string().trim(),
+      type: Joi.string().trim().valid([
+        'federal',
+        'legislative',
+        'state',
+        'local government',
+      ]),
+    };
+    const result = Joi.validate(req.body, schema);
+    if (result.error) {
+      return res.status(400).json({
+        status: 400,
+        message: result.error.details[0].message,
+      });
     }
-    function checkType(type) {
-      if (typeof (type) === 'undefined') {
-        return true;
-      }
-      if (type && type.trim().length !== 0) {
-        return true;
-      }
-      return false;
-    }
-
-    if (checkName(body.name) && checkType(body.type)) {
-      return true;
-    }
-
-    return false;
+    return next();
   },
 };
 
