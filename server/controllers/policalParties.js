@@ -1,19 +1,19 @@
 import partyData from '../models/politicalParties';
-import validate from '../helpers/partiesValidate';
+
 
 const PoliticalParty = {
 
   create(req, res) {
-    if (validate.create(req.body) === false) {
+    const politicalParty = partyData.create(req.body);
+    if (!politicalParty.status) {
       return res.status(400).json({
         status: 400,
-        error: 'All fields are required',
+        message: politicalParty.message,
       });
     }
-    const politicalParty = partyData.create(req.body);
     return res.status(201).json({
       status: 201,
-      data: politicalParty,
+      data: politicalParty.data,
     });
   },
 
@@ -48,17 +48,16 @@ const PoliticalParty = {
         message: 'Party not found',
       });
     }
-    if (validate.edit(req.body) === false) {
+    const updatedParty = partyData.update(req.params.id, req.body);
+    if (!updatedParty.status) {
       return res.status(400).json({
         status: 400,
-        message: 'Format not accepted',
+        message: updatedParty.message,
       });
     }
-
-    const updatedParty = partyData.update(req.params.id, req.body);
     return res.status(200).json({
       status: 200,
-      data: updatedParty,
+      data: updatedParty.data,
     });
   },
 

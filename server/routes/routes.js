@@ -1,23 +1,25 @@
 import express from 'express';
 import PoliticalParty from '../controllers/policalParties';
 import PoliticalOffice from '../controllers/politicalOffices';
+import validateParties from '../helpers/partiesValidate';
+import validateOffices from '../helpers/officesValidate';
 
 const router = express.Router();
 
 
 // political party routes
-router.post('/api/v1/parties', PoliticalParty.create);
+router.post('/api/v1/parties', validateParties.create, PoliticalParty.create);
 router.get('/api/v1/parties', PoliticalParty.getAll);
 router.get('/api/v1/parties/:id', PoliticalParty.getOne);
-router.patch('/api/v1/parties/:id', PoliticalParty.update);
+router.patch('/api/v1/parties/:id/name', validateParties.edit, PoliticalParty.update);
 router.delete('/api/v1/parties/:id', PoliticalParty.delete);
 
 
 // political offices routes
-router.post('/api/v1/offices', PoliticalOffice.create);
+router.post('/api/v1/offices', validateOffices.create, PoliticalOffice.create);
 router.get('/api/v1/offices', PoliticalOffice.getAll);
 router.get('/api/v1/offices/:id', PoliticalOffice.getOne);
-router.patch('/api/v1/offices/:id', PoliticalOffice.update);
+router.patch('/api/v1/offices/:id/name', validateOffices.edit, PoliticalOffice.update);
 router.delete('/api/v1/offices/:id', PoliticalOffice.delete);
 
 // all routes not found

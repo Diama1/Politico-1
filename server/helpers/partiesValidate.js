@@ -1,70 +1,47 @@
+import Joi from 'joi';
+import debuger from 'debug';
 
+debuger('debug');
 
 const validate = {
 
-  create(body) {
-    function checkName(name) {
-      if (!name || name.trim().length === 0) {
-        return false;
-      }
-      return true;
-    }
-    function checkHqAddress(hqAddress) {
-      if (!hqAddress || hqAddress.trim().length === 0) {
-        return false;
-      }
-      return true;
-    }
-    function checkLogoUrl(logoUrl) {
-      if (!logoUrl || logoUrl.trim().length === 0) {
-        return false;
-      }
-      return true;
+  create(req, res, next) {
+    const schema = {
+      name: Joi.string().trim().required(),
+      hqAddress: Joi.string().trim().required(),
+      logoUrl: Joi.string().trim().required(),
+    };
+
+    const result = Joi.validate(req.body, schema);
+
+    if (result.error) {
+      return res.status(400).json({
+        status: 400,
+        message: result.error.details[0].message,
+      });
     }
 
-
-    if (checkName(body.name) && checkHqAddress(body.hqAddress) && checkLogoUrl(body.logoUrl)) {
-      return true;
-    }
-    return false;
+    return next();
   },
 
-  edit(body) {
-    function checkName(name) {
-      if (typeof (name) === 'undefined') {
-        return true;
-      }
-      if (name && name.trim().length !== 0) {
-        return true;
-      }
-      return false;
-    }
-    function checkHqAddress(hqAddress) {
-      if (typeof (hqAddress) === 'undefined') {
-        return true;
-      }
-      if (hqAddress && hqAddress.trim().length !== 0) {
-        return true;
-      }
-      return false;
-    }
-    function checkLogoUrl(logoUrl) {
-      if (typeof (logoUrl) === 'undefined') {
-        return true;
-      }
-      if (logoUrl && logoUrl.trim().length !== 0) {
-        return true;
-      }
-      return false;
+  edit(req, res, next) {
+    const schema = {
+      name: Joi.string().trim(),
+      hqAddress: Joi.string().trim(),
+      logoUrl: Joi.string().trim(),
+    };
+    const result = Joi.validate(req.body, schema);
+
+    if (result.error) {
+      return res.status(400).json({
+        status: 400,
+        message: result.error.details[0].message,
+      });
     }
 
-
-    if (checkName(body.name) && checkHqAddress(body.hqAddress) && checkLogoUrl(body.logoUrl)) {
-      return true;
-    }
-
-    return false;
+    return next();
   },
+
 };
 
 export default validate;

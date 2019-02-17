@@ -7,6 +7,13 @@ class PoliticalOffice {
   }
 
   create(data) {
+    const check = this.findName(data.name);
+    if (check) {
+      return {
+        status: false,
+        message: 'This name already exists',
+      };
+    }
     const officeLength = this.politicalOffices.length;
     let id = officeLength + 1;
 
@@ -21,7 +28,10 @@ class PoliticalOffice {
       createdDate: moment.now(),
     };
     this.politicalOffices.push(newPoliticalOffice);
-    return newPoliticalOffice;
+    return {
+      status: true,
+      data: newPoliticalOffice,
+    };
   }
 
   getAll() {
@@ -33,11 +43,21 @@ class PoliticalOffice {
   }
 
   update(id, body) {
+    const check = this.findName(body.name);
+    if (check) {
+      return {
+        status: false,
+        message: 'This name already exists',
+      };
+    }
     const office = this.getOne(id);
     const index = this.politicalOffices.indexOf(office);
     this.politicalOffices[index].type = body.type || office.type;
     this.politicalOffices[index].name = body.name || office.name;
-    return this.politicalOffices[index];
+    return {
+      status: true,
+      data: this.politicalOffices[index],
+    };
   }
 
   delete(id) {
@@ -45,6 +65,10 @@ class PoliticalOffice {
     const index = this.politicalOffices.indexOf(office);
     this.politicalOffices.splice(index, 1);
     return {};
+  }
+
+  findName(name) {
+    return this.politicalOffices.find(office => office.name === name);
   }
 }
 

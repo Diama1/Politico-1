@@ -15,6 +15,10 @@ describe('Political Office endpoint', () => {
     type: 'federal',
     name: 'NAME2',
   };
+  const data3 = {
+    type: 'federal',
+    name: 'NAME3',
+  };
 
 
   describe('for creating an office', () => {
@@ -22,7 +26,6 @@ describe('Political Office endpoint', () => {
     it('should return a status code of 400 and error_message when validation failed', (done) => {
       Request.post(URL, { json: true, body: error_data }, (err, res, body) => {
         expect(res.statusCode).toBe(400);
-        expect(body.error).toMatch('All fields are required');
         done();
       });
     });
@@ -96,7 +99,7 @@ describe('Political Office endpoint', () => {
       Request.get(URL, (err, res, body) => {
         expect(res.statusCode).toBe(200);
         done();
-        Request.patch(URL, { json: true, body: data2 }, (err, res, body) => {
+        Request.patch(URL+'/name', { json: true, body: data2 }, (err, res, body) => {
           expect(res.statusCode).toBe(200);
           expect(typeof(body.data)).toBe('object');
           expect(body.data.name).toEqual(data2.name);
@@ -110,7 +113,7 @@ describe('Political Office endpoint', () => {
     const URL = 'http://localhost:3000/api/v1/offices/';
     let id = 0;
     beforeAll((done) => {
-      Request.post(URL, { json: true, body: data1 }, (err, res, body) => {
+      Request.post(URL, { json: true, body: data3 }, (err, res, body) => {
         id = body.data.id;
         done();
       });
