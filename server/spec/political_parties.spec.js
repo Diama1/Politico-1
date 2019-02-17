@@ -1,9 +1,9 @@
 // const partyData = require('../data/political_parties.js');
 import server from '../../index';
+import debuger from 'debug';
+import Request from 'request';
 
-const Request = require('request');
-
-
+const debug = debuger('debug');
 describe('Political party endpoint', () => {
   const error_data = {
     name: 'OPO',
@@ -19,6 +19,11 @@ describe('Political party endpoint', () => {
     hqAddress: 'KK 23 Ave',
     logoUrl: 'http://localhost:3000/img/1',
   };
+  const data3 = {
+    name: 'NAME3',
+    hqAddress: 'KK 23 Ave',
+    logoUrl: 'http://localhost:3000/img/1',
+  };
 
 
   describe('for Creating a party', () => {
@@ -26,7 +31,6 @@ describe('Political party endpoint', () => {
     it('should return a status code of 400 and error_message when validation failed', (done) => {
       Request.post(URL, { json: true, body: error_data }, (err, res, body) => {
         expect(res.statusCode).toBe(400);
-        expect(body.error).toMatch('All fields are required');
         done();
       });
     });
@@ -98,12 +102,12 @@ describe('Political party endpoint', () => {
     });
 
 
-    it('sshould return the updated party when passed an existing id and validation succeded', (done) => {
+    it('should return the updated party when passed an existing id and validation succeded', (done) => {
       const URL = 'http://localhost:3000/api/v1/parties/1';
       Request.get(URL, (err, res, body) => {
         expect(res.statusCode).toBe(200);
         done();
-        Request.patch(URL, { json: true, body: data2 }, (err, res, body) => {
+        Request.patch(URL+'/name', { json: true, body: data2 }, (err, res, body) => {
           expect(res.statusCode).toBe(200);
           expect(typeof(body.data)).toBe('object');
           expect(body.data.name).toEqual(data2.name);
@@ -118,8 +122,10 @@ describe('Political party endpoint', () => {
     const URL = 'http://localhost:3000/api/v1/parties/';
     let id = 0;
     beforeAll((done) => {
-      Request.post(URL, { json: true, body: data1 }, (err, res, body) => {
+      Request.post(URL, { json: true, body: data3 }, (err, res, body) => {
         id = body.data.id;
+        debug(body.data);
+        debug(id);
         done();
       });
     });
@@ -141,11 +147,12 @@ describe('Political party endpoint', () => {
     // });
 
     it('should return a status code of 204 when the delete was succesful', (done) => {
+      debug(id);
       Request.delete(URL + id, (err, res, body) => {
         expect(res.statusCode).toBe(204);
         done();
         Request.get(URL + id, (err, res, body) => {
-          expect(res.statusCode).toBe(404);
+          expect(res.statusCode).toBe(404);  
           done();
         });
       });
