@@ -8,7 +8,25 @@ const query = {
     modified_date TIMESTAMP
   )`,
 
-  dropPartiesTable: 'DROP TABLE IF EXISTS parties',
+  createUsersTable: `CREATE TABLE IF NOT EXISTS users(
+    id SERIAL PRIMARY KEY,
+    firstname VARCHAR(128) NOT NULL ,
+    lastname VARCHAR(128) NOT NULL ,
+    othername VARCHAR(128) ,
+    email VARCHAR(128) NOT NULL,
+    password VARCHAR(128) NOT NULL,
+    phoneNumber VARCHAR(128) ,
+    passportUrl VARCHAR(128) NOT NULL,
+    isAdmin BOOLEAN DEFAULT FALSE,
+    created_date TIMESTAMP,
+    modified_date TIMESTAMP
+  )`,
+
+  signup: `INSERT INTO
+  users(firstname, lastname, othername, email, password, phoneNumber, passportUrl, created_date, modified_date)
+  VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
+  returning *
+  `,
 
 };
 

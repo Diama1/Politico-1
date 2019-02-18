@@ -1,26 +1,38 @@
 import express from 'express';
-import PoliticalParty from '../controllers/policalParties';
-import PoliticalOffice from '../controllers/politicalOffices';
+import db from '../db/init';
+import Users from '../controllers/users';
+import PoliticalParties from '../controllers/policalParties';
+import PoliticalOffices from '../controllers/politicalOffices';
+import validateUsers from '../middleware/users';
 import validateParties from '../helpers/partiesValidate';
 import validateOffices from '../helpers/officesValidate';
 
 const router = express.Router();
 
+router.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'Welcome to POLITICO',
+  });
+  db.initialize();
+});
+
+// uses routes
+router.post('/api/v1/auth/signup', validateUsers.create, Users.create);
 
 // political party routes
-router.post('/api/v1/parties', validateParties.create, PoliticalParty.create);
-router.get('/api/v1/parties', PoliticalParty.getAll);
-router.get('/api/v1/parties/:id', PoliticalParty.getOne);
-router.patch('/api/v1/parties/:id/name', validateParties.edit, PoliticalParty.update);
-router.delete('/api/v1/parties/:id', PoliticalParty.delete);
+router.post('/api/v1/parties', validateParties.create, PoliticalParties.create);
+router.get('/api/v1/parties', PoliticalParties.getAll);
+router.get('/api/v1/parties/:id', PoliticalParties.getOne);
+router.patch('/api/v1/parties/:id/name', validateParties.edit, PoliticalParties.update);
+router.delete('/api/v1/parties/:id', PoliticalParties.delete);
 
 
 // political offices routes
-router.post('/api/v1/offices', validateOffices.create, PoliticalOffice.create);
-router.get('/api/v1/offices', PoliticalOffice.getAll);
-router.get('/api/v1/offices/:id', PoliticalOffice.getOne);
-router.patch('/api/v1/offices/:id/name', validateOffices.edit, PoliticalOffice.update);
-router.delete('/api/v1/offices/:id', PoliticalOffice.delete);
+router.post('/api/v1/offices', validateOffices.create, PoliticalOffices.create);
+router.get('/api/v1/offices', PoliticalOffices.getAll);
+router.get('/api/v1/offices/:id', PoliticalOffices.getOne);
+router.patch('/api/v1/offices/:id/name', validateOffices.edit, PoliticalOffices.update);
+router.delete('/api/v1/offices/:id', PoliticalOffices.delete);
 
 // all routes not found
 router.get('*', (req, res) => {
