@@ -37,6 +37,7 @@ describe('Political party endpoint', () => {
 
     it('should retun a status code of 201 when a new party was created', (done) => {
       Request.post(URL, { json: true, body: data1 }, (err, res, body) => {
+        debug(body);
         expect(res.statusCode).toBe(201);
         expect(typeof(body.data)).toBe('object');
         expect(body.data.name).toMatch(data1.name);
@@ -124,8 +125,6 @@ describe('Political party endpoint', () => {
     beforeAll((done) => {
       Request.post(URL, { json: true, body: data3 }, (err, res, body) => {
         id = body.data.id;
-        debug(body.data);
-        debug(id);
         done();
       });
     });
@@ -147,7 +146,6 @@ describe('Political party endpoint', () => {
     // });
 
     it('should return a status code of 204 when the delete was succesful', (done) => {
-      debug(id);
       Request.delete(URL + id, (err, res, body) => {
         expect(res.statusCode).toBe(204);
         done();

@@ -1,5 +1,8 @@
 import Request from 'request';
 import server from '../../index.js';
+import debuger from 'debug';
+
+const debug = debuger('debug');
 
 describe('Political Office endpoint', () => {
   const error_data = {
@@ -32,9 +35,11 @@ describe('Political Office endpoint', () => {
 
     it('should retun a status code of 201 when a new office was created', (done) => {
       Request.post(URL, { json: true, body: data1 }, (err, res, body) => {
+        debug(body);
         expect(res.statusCode).toBe(201);
         expect(typeof(body.data)).toBe('object');
         expect(body.data.name).toMatch(data1.name);
+
         done();
       });
     });
