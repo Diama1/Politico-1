@@ -1,76 +1,146 @@
-const moment = require('moment');
+import moment from 'moment';
+import db from '../db/runner';
+// import Authentication from '../helpers/authentication';
+import queries from '../db/queries';
 
 
-class PoliticalOffice {
-  constructor() {
-    this.politicalOffices = [];
-  }
+const PoliticalOffice = {
 
-  create(data) {
-    const check = this.findName(data.name);
-    if (check) {
+  async create(body) {
+    const createQuery = queries.createOffice;
+    console.log(body.type);
+    const values = [
+      body.name,
+      body.type,
+      moment(new Date()),
+      moment(new Date()),
+    ];
+
+    try {
+      const { rows } = await db.query(createQuery, values);
+      return {
+        status: true,
+        data: rows[0],
+      };
+    } catch (error) {
+      if (error.routine === '_bt_check_unique') {
+        return {
+          status: false,
+          message: 'Office with that name already exist',
+        };
+      }
       return {
         status: false,
-        message: 'This name already exists',
+        message: error,
       };
     }
-    const officeLength = this.politicalOffices.length;
-    let id = officeLength + 1;
+  },
 
-    if (this.politicalOffices.find(office => office.id === id)) {
-      id = this.politicalOffices[officeLength - 1].id + 1;
+  async getAll() {
+    const query = queries.getAllOffices;
+
+    try {
+      const { rows } = await db.query(query);
+      return {
+        status: true,
+        data: rows,
+      };
+    } catch (error) {
+      return {
+        status: false,
+        message: error,
+      };
     }
+  },
 
-    const newPoliticalOffice = {
+  async getOne(id) {
+    const query = queries.getOneOffices;
+    const values = [
       id,
-      type: data.type || '',
-      name: data.name || '',
-      createdDate: moment.now(),
-    };
-    this.politicalOffices.push(newPoliticalOffice);
-    return {
-      status: true,
-      data: newPoliticalOffice,
-    };
-  }
-
-  getAll() {
-    return this.politicalOffices;
-  }
-
-  getOne(id) {
-    return this.politicalOffices.find(office => office.id === parseInt(id, 10));
-  }
-
-  update(id, body) {
-    const check = this.findName(body.name);
-    if (check) {
+    ];
+    try {
+      const { rows } = await db.query(query, values);
+      if (!rows[0]) {
+        return {
+          status: false,
+          message: 'Office not found',
+        };
+      }
+      return {
+        status: true,
+        data: rows[0],
+      };
+    } catch (error) {
       return {
         status: false,
-        message: 'This name already exists',
+        message: error,
       };
     }
-    const office = this.getOne(id);
-    const index = this.politicalOffices.indexOf(office);
-    this.politicalOffices[index].type = body.type || office.type;
-    this.politicalOffices[index].name = body.name || office.name;
-    return {
-      status: true,
-      data: this.politicalOffices[index],
-    };
-  }
+  },
 
-  delete(id) {
+  async update(id, body) {
     const office = this.getOne(id);
-    const index = this.politicalOffices.indexOf(office);
-    this.politicalOffices.splice(index, 1);
-    return {};
-  }
+    const query = queries.updateOffice;
+    const updatedOffice = office.then(async (result) => {
+      if (!result.status) {
+        return {
+          status: false,
+          message: result.message,
+        };
+      }
+      const values = [
+        body.name || result.data.name,
+        body.type || result.data.type,
+        moment(new Date()),
+        id,
+      ];
+      try {
+        const { rows } = await db.query(query, values);
+        return {
+          status: true,
+          data: rows[0],
+        };
+      } catch (error) {
+        if (error.routine === '_bt_check_unique') {
+          return {
+            status: false,
+            message: 'Office with that name already exist',
+          };
+        }
+        return {
+          status: false,
+          message: error,
+        };
+      }
+    });
+    return updatedOffice;
+  },
+
+  async delete(id) {
+    const query = queries.deleteOffice;
+    try {
+      const res = await db.query(query, [id]);
+      if (res.rowCount !== 1) {
+        return {
+          status: false,
+          message: 'Office not found',
+        };
+      }
+      return {
+        status: true,
+      };
+    } catch (error) {
+      return {
+        status: false,
+        message: error,
+      };
+    }
+  },
 
   findName(name) {
     return this.politicalOffices.find(office => office.name === name);
-  }
-}
+  },
+};
 
 
-export default new PoliticalOffice();
+export default PoliticalOffice;

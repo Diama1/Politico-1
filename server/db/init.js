@@ -39,9 +39,24 @@ const Initialize = {
       });
   },
 
+  createOfficesTable: () => {
+    const queryText = query.createOfficesTable;
+    pool.query(queryText)
+      .then(() => {
+        console.log('office table created');
+        pool.end();
+      })
+      .catch((err) => {
+        console.log(err);
+        pool.end();
+      });
+  },
+
   initialize() {
+    this.createOfficesTable();
     this.createPartiesTable();
     this.createUsersTable();
+    // pool.removeListener();
     console.log('connected to the db');
   },
 
