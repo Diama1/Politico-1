@@ -5,10 +5,11 @@
     },
     "extends": "airbnb-base",
     "parserOptions": {
-        "ecmaVersion": 2015,
+        "ecmaVersion": 2017,
         "sourceType": "module"
     },
     "rules": {
-        "no-console": "off"
+        "no-console": "off",
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true, "optionalDependencies": false, "peerDependencies": false}]
     }
 }
