@@ -13,11 +13,13 @@ router.get('/', (req, res) => {
   res.status(200).json({
     message: 'Welcome to POLITICO',
   });
-  db.initialize();
+  const databaseInit = db.initialize();
+  console.log(databaseInit);
 });
 
 // uses routes
 router.post('/api/v1/auth/signup', validateUsers.create, Users.create);
+router.post('/api/v1/auth/login', validateUsers.login, Users.login);
 
 // political party routes
 router.post('/api/v1/parties', validateParties.create, PoliticalParties.create);

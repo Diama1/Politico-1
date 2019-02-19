@@ -44,6 +44,30 @@ const User = {
     return response;
   },
 
+  async login(body) {
+    const text = query.login;
+    try {
+      const { rows } = await db.query(text, [body.email]);
+      if (!rows[0] || !Authentication.comparePassword(rows[0].password, body.password)) {
+        return {
+          status: false,
+          message: 'The credentials you provided is incorrect',
+        };
+      }
+      const token = Authentication.generateToken(rows[0].id);
+      return {
+        status: true,
+        row: rows[0],
+        token,
+      };
+    } catch (error) {
+      return {
+        status: false,
+        message: error,
+      };
+    }
+  },
+
 };
 
 export default User;

@@ -13,7 +13,7 @@ const query = {
     firstname VARCHAR(128) NOT NULL ,
     lastname VARCHAR(128) NOT NULL ,
     othername VARCHAR(128) ,
-    email VARCHAR(128) NOT NULL,
+    email VARCHAR(128) NOT NULL UNIQUE,
     password VARCHAR(128) NOT NULL,
     phoneNumber VARCHAR(128) ,
     passportUrl VARCHAR(128) NOT NULL,
@@ -27,6 +27,8 @@ const query = {
   VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
   returning *
   `,
+
+  login: 'SELECT * FROM users WHERE email = $1',
 
 };
 
