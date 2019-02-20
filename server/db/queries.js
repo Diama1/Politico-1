@@ -4,6 +4,7 @@ const query = {
     id SERIAL PRIMARY KEY,
     name VARCHAR(128) NOT NULL UNIQUE,
     hqAddress VARCHAR(128) NOT NULL,
+    logoUrl VARCHAR(128) NOT NULL,
     created_date TIMESTAMP,
     modified_date TIMESTAMP
   )`,
@@ -52,6 +53,20 @@ const query = {
   updateOffice: 'UPDATE offices SET name = $1, type = $2, modified_date = $3 where id = $4 returning *',
 
   deleteOffice: 'DELETE from offices where id = $1',
+
+  // parties queries
+  createParty: `INSERT INTO 
+  parties(name, hqaddress, logourl, created_date, modified_date) 
+  VALUES($1, $2, $3, $4, $5)
+  returning *
+  `,
+  getAllParties: 'SELECT * FROM parties',
+
+  getOneParties: 'SELECT * from parties where id = $1',
+
+  updateParty: 'UPDATE parties SET name = $1, hqAddress = $2, logoUrl = $3,  modified_date = $4 where id = $5 returning *',
+
+  deleteParty: 'DELETE from parties where id = $1',
 
 };
 
