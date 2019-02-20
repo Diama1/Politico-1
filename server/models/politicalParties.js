@@ -39,7 +39,6 @@ const politicalParty = {
 
   async getAll() {
     const query = queries.getAllParties;
-
     try {
       const { rows } = await db.query(query);
       return {

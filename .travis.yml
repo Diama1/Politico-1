@@ -1,6 +1,11 @@
 language: node_js
 node_js:
   - "8.15.0"
+services:
+ - postgresql
+before_script:
+ - psql -c "create user hadad with PASSWORD 'dusmel';" -U postgres
+ - psql -c 'create database politico;' -U hadad
 script:
   - npx eslint server
   - npm test

@@ -24,6 +24,11 @@ describe('Political party endpoint', () => {
     hqAddress: 'KK 23 Ave',
     logoUrl: 'http://localhost:3000/img/1',
   };
+  const data4 = {
+    name: 'NAME4',
+    hqAddress: 'KK 23 Ave',
+    logoUrl: 'http://localhost:3000/img/1',
+  };
 
 
   describe('for Creating a party', () => {
@@ -61,14 +66,16 @@ describe('Political party endpoint', () => {
 
 
   describe('for Getting one party', () => {
+    let id;
     beforeAll((done) => {
-      Request.post('http://localhost:3000/api/v1/parties/', { json: true, body: data1 }, (err, res, body) => {
+      Request.post('http://localhost:3000/api/v1/parties/', { json: true, body: data3 }, (err, res, body) => {
+        id = body.data.id;
         done();
       });
     });
 
     it('should return a not found when passed a wrong id', (done) => {
-      const URL = 'http://localhost:3000/api/v1/parties/50';
+      const URL = 'http://localhost:3000/api/v1/parties/500';
       Request.get(URL, (err, res, body) => {
         expect(res.statusCode).toEqual(404);
         done();
@@ -76,7 +83,7 @@ describe('Political party endpoint', () => {
     });
 
     it('should return a specific party when passed an existant id', (done) => {
-      const URL = 'http://localhost:3000/api/v1/parties/1';
+      const URL = 'http://localhost:3000/api/v1/parties/'+id;
       Request.get(URL, (err, res, body) => {
         body = JSON.parse(body);
         expect(res.statusCode).toBe(200);
@@ -88,8 +95,10 @@ describe('Political party endpoint', () => {
 
 
   describe('for updating a specific party', () => {
+    let id;
     beforeAll((done) => {
-      Request.post('http://localhost:3000/api/v1/parties/', { json: true, body: data1 }, (err, res, body) => {
+      Request.post('http://localhost:3000/api/v1/parties/', { json: true, body: data4 }, (err, res, body) => {
+        id = body.data.id
         done();
       });
     });
@@ -104,7 +113,7 @@ describe('Political party endpoint', () => {
 
 
     it('should return the updated party when passed an existing id and validation succeded', (done) => {
-      const URL = 'http://localhost:3000/api/v1/parties/1';
+      const URL = 'http://localhost:3000/api/v1/parties/'+id;
       Request.get(URL, (err, res, body) => {
         expect(res.statusCode).toBe(200);
         done();

@@ -1,11 +1,11 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
-import query from './queries';
+import query from '../../db/queries';
 
 dotenv.config();
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL_TEST,
 });
 
 

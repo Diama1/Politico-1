@@ -22,6 +22,14 @@ describe('Political Office endpoint', () => {
     type: 'federal',
     name: 'NAME3',
   };
+  const data4 = {
+    type: 'federal',
+    name: 'NAME4',
+  };
+  const data5 = {
+    type: 'federal',
+    name: 'NAME5',
+  };
 
 
   describe('for creating an office', () => {
@@ -59,7 +67,7 @@ describe('Political Office endpoint', () => {
 
   describe('for Getting one office', () => {
     beforeAll((done) => {
-      Request.post('http://localhost:3000/api/v1/offices/', { json: true, body: data1 }, (err, res, body) => {
+      Request.post('http://localhost:3000/api/v1/offices/', { json: true, body: data4 }, (err, res, body) => {
         done();
       });
     });
@@ -84,15 +92,17 @@ describe('Political Office endpoint', () => {
   });
 
   describe('for updating a specific office', () => {
+    let id;
     beforeAll((done) => {
-      Request.post('http://localhost:3000/api/v1/offices/', { json: true, body: data1 }, (err, res, body) => {
+      Request.post('http://localhost:3000/api/v1/offices/', { json: true, body: data5 }, (err, res, body) => {
         done();
+        id = body.data.id
       });
     });
 
     it('should return a not found when passed a wrong id', (done) => {
-      const URL = 'http://localhost:3000/api/v1/offices/50';
-      Request.patch(URL, { json: true, body: data1 }, (err, res, body) => {
+      const URL = 'http://localhost:3000/api/v1/offices/500';
+      Request.patch(URL, { json: true, body: data5 }, (err, res, body) => {
         expect(res.statusCode).toEqual(404);
         done();
       });
@@ -100,7 +110,7 @@ describe('Political Office endpoint', () => {
 
 
     it('should return the updated office when passed an existing id and validation succeded ', (done) => {
-      const URL = 'http://localhost:3000/api/v1/offices/1';
+      const URL = 'http://localhost:3000/api/v1/offices/'+id;
       Request.get(URL, (err, res, body) => {
         expect(res.statusCode).toBe(200);
         done();

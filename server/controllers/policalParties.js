@@ -19,20 +19,31 @@ const PoliticalParty = {
     });
   },
 
-  getAll(req, res) {
-    const politicalParties = partyData.getAll(req.body);
-    politicalParties.then((parties) => {
-      if (!parties.status) {
-        return res.status(400).json({
-          status: 400,
-          error: parties.message,
-        });
-      }
-      return res.status(200).json({
-        status: 200,
-        data: parties.data,
+  async getAll(req, res) {
+    const politicalParties = await partyData.getAll(req.body);
+    if (!politicalParties.status) {
+      return res.status(400).json({
+        status: 400,
+        error: politicalParties.message,
       });
+    }
+    console.log(politicalParties);
+    return res.status(200).json({
+      status: 200,
+      data: politicalParties.data,
     });
+    // politicalParties.then((parties) => {
+    //   if (!parties.status) {
+    //     return res.status(400).json({
+    //       status: 400,
+    //       error: parties.message,
+    //     });
+    //   }
+    //   return res.status(200).json({
+    //     status: 200,
+    //     data: parties.data,
+    //   });
+    // });
   },
 
   getOne(req, res) {

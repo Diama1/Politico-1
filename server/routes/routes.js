@@ -1,5 +1,4 @@
 import express from 'express';
-import db from '../db/init';
 import Users from '../controllers/users';
 import PoliticalParties from '../controllers/policalParties';
 import PoliticalOffices from '../controllers/politicalOffices';
@@ -9,12 +8,10 @@ import validateOffices from '../helpers/officesValidate';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   res.status(200).json({
     message: 'Welcome to POLITICO',
   });
-  const databaseInit = db.initialize();
-  console.log(databaseInit);
 });
 
 // uses routes
