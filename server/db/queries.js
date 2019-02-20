@@ -68,7 +68,7 @@ const query = {
 
   deleteParty: 'DELETE from parties where id = $1',
 
-  dropAllTables: 'DROP TABLE  offices, parties, users',
+  dropAllTables: 'DROP TABLE IF EXISTS offices, parties, users',
 
 };
 
