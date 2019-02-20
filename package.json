@@ -4,10 +4,12 @@
   "description": "Politico enables citizens to give their mandate to politicians running for different government offices while building trust in the process through transparency.",
   "main": "index.js",
   "scripts": {
-    "test": "nyc jasmine JASMINE_CONFIG_PATH=server/spec/support/jasmine.json ",
     "start": "node index.js",
     "build": "babel index.js --out-dir build",
     "dev-start": "babel-watch index.js",
+    "dbInit": "babel-node server/db/init.js --",
+    "testDbInit": "babel-node server/spec/db/init.js --",
+    "test": "npm run dbInit && nyc jasmine JASMINE_CONFIG_PATH=server/spec/support/jasmine.json ",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
@@ -23,6 +25,7 @@
   "homepage": "https://github.com/dusmel/Politico#readme",
   "dependencies": {
     "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.3.1",
     "@babel/register": "^7.0.0",
@@ -37,6 +40,7 @@
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
     "pg": "^7.8.0",
+    "randomstring": "^1.1.5",
     "request": "^2.88.0"
   },
   "devDependencies": {

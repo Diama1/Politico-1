@@ -5,75 +5,80 @@ const PoliticalOffice = {
 
   create(req, res) {
     const politicalOffice = officeData.create(req.body);
-    if (!politicalOffice.status) {
-      return res.status(400).json({
-        status: 400,
-        message: politicalOffice.message,
+    politicalOffice.then((office) => {
+      if (!office.status) {
+        return res.status(400).json({
+          status: 400,
+          error: office.message,
+        });
+      }
+      return res.status(201).json({
+        status: 201,
+        data: office.data,
       });
-    }
-    return res.status(201).json({
-      status: 201,
-      data: politicalOffice.data,
     });
   },
 
   getAll(req, res) {
-    const politicalOffices = officeData.getAll();
-    return res.status(200).json({
-      status: 200,
-      data: politicalOffices,
+    const politicalOffices = officeData.getAll(req.body);
+    politicalOffices.then((offices) => {
+      if (!offices.status) {
+        return res.status(400).json({
+          status: 400,
+          error: offices.message,
+        });
+      }
+      return res.status(200).json({
+        status: 200,
+        data: offices.data,
+      });
     });
   },
 
-  getOne(request, res) {
-    const politicalOffice = officeData.getOne(request.params.id);
-    if (!politicalOffice) {
-      return res.status(404).json({
-        status: 404,
-        message: 'Office not found',
+  getOne(req, res) {
+    const politicalOffice = officeData.getOne(req.params.id);
+    politicalOffice.then((office) => {
+      if (!office.status) {
+        return res.status(404).json({
+          status: 404,
+          error: office.message,
+        });
+      }
+      return res.status(200).json({
+        status: 200,
+        data: office.data,
       });
-    }
-
-    return res.status(200).json({
-      status: 200,
-      data: politicalOffice,
     });
   },
 
   update(req, res) {
-    const politicalOffice = officeData.getOne(req.params.id);
-    if (!politicalOffice) {
-      return res.status(404).json({
-        status: 404,
-        message: 'office not found',
-      });
-    }
     const updatedOffice = officeData.update(req.params.id, req.body);
-    if (!updatedOffice.status) {
-      return res.status(400).json({
-        status: 400,
-        message: updatedOffice.message,
+    console.log(updatedOffice);
+    updatedOffice.then((office) => {
+      if (!office.status) {
+        return res.status(404).json({
+          status: 404,
+          error: office.message,
+        });
+      }
+      return res.status(200).json({
+        status: 200,
+        data: office.data,
       });
-    }
-    return res.status(200).json({
-      status: 200,
-      data: updatedOffice.data,
     });
   },
 
   delete(req, res) {
-    const politicalOffice = officeData.getOne(req.params.id);
-    if (!politicalOffice) {
-      return res.status(404).json({
-        status: 404,
-        message: 'office not found',
+    const office = officeData.delete(req.params.id);
+    office.then((result) => {
+      if (!result.status) {
+        return res.status(404).json({
+          status: 404,
+          error: result.message,
+        });
+      }
+      return res.status(204).send({
       });
-    }
-
-    officeData.delete(req.params.id);
-    return res.status(204).json({
-      status: 204,
-      message: 'office deleted',
     });
   },
 

@@ -1,79 +1,144 @@
-const moment = require('moment');
+import moment from 'moment';
+import db from '../db/runner';
+import queries from '../db/queries';
 
 
-class PoliticalParty {
-  constructor() {
-    this.politicalParties = [];
-  }
+const politicalParty = {
+  async create(body) {
+    const createQuery = queries.createParty;
+    console.log(body.type);
+    const values = [
+      body.name,
+      body.hqAddress,
+      body.logoUrl,
+      moment(new Date()),
+      moment(new Date()),
+    ];
+    console.log(body);
 
-
-  create(data) {
-    const check = this.findName(data.name);
-    if (check) {
+    try {
+      const { rows } = await db.query(createQuery, values);
+      return {
+        status: true,
+        data: rows[0],
+      };
+    } catch (error) {
+      if (error.routine === '_bt_check_unique') {
+        return {
+          status: false,
+          message: 'Party with that name already exist',
+        };
+      }
       return {
         status: false,
-        message: 'This name already exists',
+        message: error,
       };
     }
-    const partyLength = this.politicalParties.length;
-    let id = partyLength + 1;
+  },
 
-    if (this.politicalParties.find(party => party.id === id)) {
-      id = this.politicalParties[partyLength - 1].id + 1;
+
+  async getAll() {
+    const query = queries.getAllParties;
+    try {
+      const { rows } = await db.query(query);
+      return {
+        status: true,
+        data: rows,
+      };
+    } catch (error) {
+      return {
+        status: false,
+        message: error,
+      };
     }
+  },
 
-    const newPoliticalParty = {
+  async getOne(id) {
+    const query = queries.getOneParties;
+    const values = [
       id,
-      name: data.name || '',
-      hqAddress: data.hqAddress || '',
-      logoUrl: data.logoUrl || '',
-      createdDate: moment.now(),
-    };
-    this.politicalParties.push(newPoliticalParty);
-    return {
-      status: true,
-      data: newPoliticalParty,
-    };
-  }
-
-  getAll() {
-    return this.politicalParties;
-  }
-
-  getOne(id) {
-    return this.politicalParties.find(party => party.id === parseInt(id, 10));
-  }
-
-  update(id, body) {
-    const party = this.getOne(id);
-    const check = this.findName(body.name);
-    if (check) {
+    ];
+    try {
+      const { rows } = await db.query(query, values);
+      if (!rows[0]) {
+        return {
+          status: false,
+          message: 'Party not found',
+        };
+      }
+      return {
+        status: true,
+        data: rows[0],
+      };
+    } catch (error) {
       return {
         status: false,
-        message: 'This name already exists',
+        message: error,
       };
     }
-    const index = this.politicalParties.indexOf(party);
-    this.politicalParties[index].name = body.name || party.name;
-    this.politicalParties[index].hqAddress = body.hqAddress || party.hqAddress;
-    this.politicalParties[index].logoUrl = body.logoUrl || party.logoUrl;
-    return {
-      status: true,
-      data: this.politicalParties[index],
-    };
-  }
+  },
 
-  delete(id) {
+  async update(id, body) {
     const party = this.getOne(id);
-    const index = this.politicalParties.indexOf(party);
-    this.politicalParties.splice(index, 1);
-    return {};
-  }
+    const query = queries.updateParty;
+    const updatedParty = party.then(async (result) => {
+      if (!result.status) {
+        return {
+          status: false,
+          message: result.message,
+        };
+      }
+      const values = [
+        body.name || result.data.name,
+        body.hqAddress || result.data.hqaddress,
+        body.logoUrl || result.data.logourl,
+        moment(new Date()),
+        id,
+      ];
+      try {
+        const { rows } = await db.query(query, values);
+        return {
+          status: true,
+          data: rows[0],
+        };
+      } catch (error) {
+        if (error.routine === '_bt_check_unique') {
+          return {
+            status: false,
+            message: 'A party with that name already exist',
+          };
+        }
+        return {
+          status: false,
+          message: error,
+        };
+      }
+    });
+    return updatedParty;
+  },
 
-  findName(name) {
-    return this.politicalParties.find(party => party.name === name);
-  }
-}
+  async delete(id) {
+    const query = queries.deleteParty;
+    try {
+      const res = await db.query(query, [id]);
+      if (res.rowCount !== 1) {
+        return {
+          status: false,
+          message: 'Party not found',
+        };
+      }
+      return {
+        status: true,
+      };
+    } catch (error) {
+      return {
+        status: false,
+        message: error,
+      };
+    }
+  },
+
+};
 
 
-export default new PoliticalParty();
+export default politicalParty;

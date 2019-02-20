@@ -5,75 +5,90 @@ const PoliticalParty = {
 
   create(req, res) {
     const politicalParty = partyData.create(req.body);
-    if (!politicalParty.status) {
+    politicalParty.then((party) => {
+      if (!party.status) {
+        return res.status(400).json({
+          status: 400,
+          error: party.message,
+        });
+      }
+      return res.status(201).json({
+        status: 201,
+        data: party.data,
+      });
+    });
+  },
+
+  async getAll(req, res) {
+    const politicalParties = await partyData.getAll(req.body);
+    if (!politicalParties.status) {
       return res.status(400).json({
         status: 400,
-        message: politicalParty.message,
+        error: politicalParties.message,
       });
     }
-    return res.status(201).json({
-      status: 201,
-      data: politicalParty.data,
-    });
-  },
-
-  getAll(req, res) {
-    const politicalParties = partyData.getAll();
+    console.log(politicalParties);
     return res.status(200).json({
       status: 200,
-      data: politicalParties,
+      data: politicalParties.data,
     });
+    // politicalParties.then((parties) => {
+    //   if (!parties.status) {
+    //     return res.status(400).json({
+    //       status: 400,
+    //       error: parties.message,
+    //     });
+    //   }
+    //   return res.status(200).json({
+    //     status: 200,
+    //     data: parties.data,
+    //   });
+    // });
   },
 
-  getOne(request, res) {
-    const politicalParty = partyData.getOne(request.params.id);
-    if (!politicalParty) {
-      return res.status(404).json({
-        status: 404,
-        message: 'Party not found',
+  getOne(req, res) {
+    const politicalParty = partyData.getOne(req.params.id);
+    politicalParty.then((party) => {
+      if (!party.status) {
+        return res.status(404).json({
+          status: 404,
+          error: party.message,
+        });
+      }
+      return res.status(200).json({
+        status: 200,
+        data: party.data,
       });
-    }
-
-    return res.status(200).json({
-      status: 200,
-      data: politicalParty,
     });
   },
 
   update(req, res) {
-    const politicalParty = partyData.getOne(req.params.id);
-    if (!politicalParty) {
-      return res.status(404).json({
-        status: 404,
-        message: 'Party not found',
-      });
-    }
     const updatedParty = partyData.update(req.params.id, req.body);
-    if (!updatedParty.status) {
-      return res.status(400).json({
-        status: 400,
-        message: updatedParty.message,
+    updatedParty.then((party) => {
+      if (!party.status) {
+        return res.status(404).json({
+          status: 404,
+          error: party.message,
+        });
+      }
+      return res.status(200).json({
+        status: 200,
+        data: party.data,
       });
-    }
-    return res.status(200).json({
-      status: 200,
-      data: updatedParty.data,
     });
   },
 
   delete(req, res) {
-    const politicalParty = partyData.getOne(req.params.id);
-    if (!politicalParty) {
-      return res.status(404).json({
-        status: 404,
-        message: 'Party not found',
+    const party = partyData.delete(req.params.id);
+    party.then((result) => {
+      if (!result.status) {
+        return res.status(404).json({
+          status: 404,
+          error: result.message,
+        });
+      }
+      return res.status(204).send({
       });
-    }
-
-    partyData.delete(req.params.id);
-    return res.status(204).json({
-      status: 204,
-      message: 'party deleted',
     });
   },
 
