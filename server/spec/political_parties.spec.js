@@ -29,6 +29,11 @@ describe('Political party endpoint', () => {
     hqAddress: 'KK 23 Ave',
     logoUrl: 'http://localhost:3000/img/1',
   };
+  const data5 = {
+    name: 'NAME5',
+    hqAddress: 'KK 23 Ave',
+    logoUrl: 'http://localhost:3000/img/1',
+  };
 
 
   describe('for Creating a party', () => {
@@ -129,10 +134,10 @@ describe('Political party endpoint', () => {
 
 
   describe('for deleting a specific party', () => {
+    let id;
     const URL = 'http://localhost:3000/api/v1/parties/';
-    let id = 0;
     beforeAll((done) => {
-      Request.post(URL, { json: true, body: data3 }, (err, res, body) => {
+      Request.post(URL, { json: true, body: data5 }, (err, res, body) => {
         id = body.data.id;
         done();
       });

@@ -30,6 +30,10 @@ describe('Political Office endpoint', () => {
     type: 'federal',
     name: 'NAME5',
   };
+  const data6 = {
+    type: 'federal',
+    name: 'NAME6',
+  };
 
 
   describe('for creating an office', () => {
@@ -66,8 +70,12 @@ describe('Political Office endpoint', () => {
   });
 
   describe('for Getting one office', () => {
+    let id;
     beforeAll((done) => {
       Request.post('http://localhost:3000/api/v1/offices/', { json: true, body: data4 }, (err, res, body) => {
+        id = body.data.id;
+        debug('here');
+        debug(id);
         done();
       });
     });
@@ -81,7 +89,8 @@ describe('Political Office endpoint', () => {
     });
 
     it('should return a specific office when passed an existant id', (done) => {
-      const URL = 'http://localhost:3000/api/v1/offices/1';
+      const URL = 'http://localhost:3000/api/v1/offices/'+id;
+      debug('here '+id);
       Request.get(URL, (err, res, body) => {
         body = JSON.parse(body);
         expect(res.statusCode).toBe(200);
@@ -125,8 +134,8 @@ describe('Political Office endpoint', () => {
   });
 
   describe('for deleting a specific office', () => {
+    let id;
     const URL = 'http://localhost:3000/api/v1/offices/';
-    let id = 0;
     beforeAll((done) => {
       Request.post(URL, { json: true, body: data3 }, (err, res, body) => {
         id = body.data.id;
