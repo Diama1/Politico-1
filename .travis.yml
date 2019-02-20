@@ -5,7 +5,7 @@ services:
  - postgresql
 before_script:
  - psql -c "create user hadad with PASSWORD 'dusmel';" -U postgres
- - psql -c 'create database politico;' -U hadad
+ - psql -c 'create database politico;' -U postgres
 script:
   - npx eslint server
   - npm test
