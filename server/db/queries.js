@@ -22,6 +22,12 @@ const query = {
     created_date TIMESTAMP,
     modified_date TIMESTAMP
   )`,
+  createCandidatesTable: `CREATE TABLE IF NOT EXISTS candidates(
+    id SERIAL PRIMARY KEY,
+    office INTEGER REFERENCES offices(id) ON DELETE CASCADE,
+    party INTEGER REFERENCES parties(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+  )`,
 
   createOfficesTable: `CREATE TABLE IF NOT EXISTS offices(
     id SERIAL PRIMARY KEY,
@@ -69,6 +75,10 @@ const query = {
   deleteParty: 'DELETE from parties where id = $1',
 
   dropAllTables: 'DROP TABLE IF EXISTS offices, parties, users',
+
+  register: 'INSERT INTO candidates(office, party, user_id) VALUES($1, $2, $3) returning *',
+
+  checkCandidate: 'SELECT * FROM candidates where office = $1 AND user_id = $2',
 
 };
 

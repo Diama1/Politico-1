@@ -2,9 +2,11 @@ import express from 'express';
 import Users from '../controllers/users';
 import PoliticalParties from '../controllers/policalParties';
 import PoliticalOffices from '../controllers/politicalOffices';
+import Candidates from '../controllers/candidates';
 import validateUsers from '../middleware/users';
 import validateParties from '../helpers/partiesValidate';
 import validateOffices from '../helpers/officesValidate';
+import validateCandidates from '../middleware/candidates';
 
 const router = express.Router();
 
@@ -14,7 +16,7 @@ router.get('/', async (req, res) => {
   });
 });
 
-// uses routes
+// users routes
 router.post('/api/v1/auth/signup', validateUsers.create, Users.create);
 router.post('/api/v1/auth/login', validateUsers.login, Users.login);
 
@@ -32,6 +34,11 @@ router.get('/api/v1/offices', PoliticalOffices.getAll);
 router.get('/api/v1/offices/:id', PoliticalOffices.getOne);
 router.patch('/api/v1/offices/:id/name', validateOffices.edit, PoliticalOffices.update);
 router.delete('/api/v1/offices/:id', PoliticalOffices.delete);
+
+
+// Candidates
+router.post('/api/v1/office/:id/register', validateCandidates.register, Candidates.register);
+
 
 // all routes not found
 router.get('*', (req, res) => {
