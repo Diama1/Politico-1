@@ -57,6 +57,20 @@ const User = {
     });
   },
 
+  async makeAdmin(req, res) {
+    const newAdmin = await userModel.makeAdmin(req.params.id);
+    if (!newAdmin.status) {
+      return res.status(400).json({
+        status: 400,
+        error: newAdmin.message,
+      });
+    }
+    return res.status(200).json({
+      status: 200,
+      data: newAdmin.data,
+    });
+  },
+
 };
 
 export default User;

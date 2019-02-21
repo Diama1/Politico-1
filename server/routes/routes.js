@@ -7,6 +7,7 @@ import validateUsers from '../middleware/users';
 import validateParties from '../helpers/partiesValidate';
 import validateOffices from '../helpers/officesValidate';
 import validateCandidates from '../middleware/candidates';
+import User from '../models/users';
 
 const router = express.Router();
 
@@ -44,6 +45,9 @@ router.post('/api/v1/votes', validateUsers.vote, Users.vote);
 
 // result of election
 router.post('/api/v1/office/:id/result', PoliticalOffices.getResultOfElection);
+
+// make admin
+router.post('/api/v1/admin/:id', Users.makeAdmin);
 
 // all routes not found
 router.get('*', (req, res) => {

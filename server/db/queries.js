@@ -99,6 +99,8 @@ const query = {
 
   getResultOfElection: 'SELECT  office ,candidate, CAST(COUNT(*)AS Int) AS result FROM votes where office = $1 GROUP BY candidate, office',
 
+  makeAdmin: 'UPDATE users SET isadmin = true where id = $1 returning *',
+
 };
 
 export default query;
