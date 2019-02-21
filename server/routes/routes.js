@@ -22,18 +22,18 @@ router.post('/api/v1/auth/login', validateUsers.login, Users.login);
 
 // political party routes
 router.post('/api/v1/parties', validateParties.create, PoliticalParties.create);
-router.get('/api/v1/parties', PoliticalParties.getAll);
-router.get('/api/v1/parties/:id', PoliticalParties.getOne);
+router.get('/api/v1/parties', validateParties.getAll, PoliticalParties.getAll);
+router.get('/api/v1/parties/:id', validateParties.getOne, PoliticalParties.getOne);
 router.patch('/api/v1/parties/:id/name', validateParties.edit, PoliticalParties.update);
-router.delete('/api/v1/parties/:id', PoliticalParties.delete);
+router.delete('/api/v1/parties/:id', validateParties.delete, PoliticalParties.delete);
 
 
 // political offices routes
 router.post('/api/v1/offices', validateOffices.create, PoliticalOffices.create);
-router.get('/api/v1/offices', PoliticalOffices.getAll);
-router.get('/api/v1/offices/:id', PoliticalOffices.getOne);
+router.get('/api/v1/offices', validateOffices.getAll, PoliticalOffices.getAll);
+router.get('/api/v1/offices/:id', validateOffices.getOne, PoliticalOffices.getOne);
 router.patch('/api/v1/offices/:id/name', validateOffices.edit, PoliticalOffices.update);
-router.delete('/api/v1/offices/:id', PoliticalOffices.delete);
+router.delete('/api/v1/offices/:id', validateOffices.delete, PoliticalOffices.delete);
 
 
 // Candidates
