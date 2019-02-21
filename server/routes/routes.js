@@ -41,6 +41,12 @@ router.post('/api/v1/office/:id/register', validateCandidates.register, Candidat
 
 // vote
 router.post('/api/v1/votes', validateUsers.vote, Users.vote);
+<<<<<<< HEAD
+=======
+
+// result of election
+router.post('/api/v1/office/:id/result', PoliticalOffices.getResultOfElection);
+>>>>>>>  this commit will make it possible to display the result of the election on a particular office
 
 // all routes not found
 router.get('*', (req, res) => {
