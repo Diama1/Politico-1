@@ -1,6 +1,5 @@
 import moment from 'moment';
 import db from '../db/runner';
-// import Authentication from '../helpers/authentication';
 import queries from '../db/queries';
 
 
@@ -139,8 +138,8 @@ const PoliticalOffice = {
   async resultOfElection(office) {
     const query = queries.getResultOfElection;
     try {
-      const result = await db.query(query, [office]);
-      if (result.rowCount < 1) {
+      const res = await db.query(query, [office]);
+      if (res.rowCount < 1) {
         return {
           status: false,
           message: 'There are no votes for this office yet',
@@ -148,7 +147,7 @@ const PoliticalOffice = {
       }
       return {
         status: true,
-        data: result.rows,
+        data: res.rows,
       };
     } catch (error) {
       return {
