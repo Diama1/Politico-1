@@ -97,6 +97,8 @@ const query = {
 
   checkVote: 'SELECT * FROM votes where office = $1 AND createdby = $2',
 
+  getResultOfElection: 'SELECT  office ,candidate, CAST(COUNT(*)AS Int) AS result FROM votes where office = $1 GROUP BY candidate, office',
+
 };
 
 export default query;

@@ -82,6 +82,20 @@ const PoliticalOffice = {
     });
   },
 
+  async getResultOfElection(req, res) {
+    const result = await officeData.resultOfElection(req.params.id);
+    if (!result.status) {
+      return res.status(404).json({
+        status: 404,
+        error: result.message,
+      });
+    }
+    return res.status(200).json({
+      status: 200,
+      data: result.data,
+    });
+  },
+
 
 };
 

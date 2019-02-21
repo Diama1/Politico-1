@@ -136,6 +136,28 @@ const PoliticalOffice = {
     }
   },
 
+  async resultOfElection(office) {
+    const query = queries.getResultOfElection;
+    try {
+      const result = await db.query(query, [office]);
+      if (result.rowCount < 1) {
+        return {
+          status: false,
+          message: 'There are no votes for this office yet',
+        };
+      }
+      return {
+        status: true,
+        data: result.rows,
+      };
+    } catch (error) {
+      return {
+        status: false,
+        message: error,
+      };
+    }
+  },
+
   findName(name) {
     return this.politicalOffices.find(office => office.name === name);
   },
