@@ -52,6 +52,7 @@ const authenticate = async (req, res, next, requireAdmin) => {
       error: verifiedToken.message,
     });
   }
+  req.user = { id: verifiedToken.data.id };
   return next();
 };
 
@@ -94,7 +95,7 @@ const validate = {
 
   async vote(req, res, next) {
     const schema = {
-      createdBy: Joi.number().required(),
+      // createdBy: Joi.number().required(),
       office: Joi.number().required(),
       candidate: Joi.number().required(),
     };

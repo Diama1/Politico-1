@@ -70,9 +70,9 @@ const User = {
     }
   },
 
-  async vote(body) {
+  async vote(body, userId) {
     const queryTxt = query.vote;
-    const check = await this.checkVote(body.office, body.createdBy);
+    const check = await this.checkVote(body.office, userId);
     if (!check.status) {
       return {
         status: false,
@@ -81,7 +81,7 @@ const User = {
     }
     const params = [
       moment(new Date()),
-      body.createdBy,
+      userId,
       body.office,
       body.candidate,
     ];

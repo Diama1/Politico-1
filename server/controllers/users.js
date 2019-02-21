@@ -40,7 +40,7 @@ const User = {
   },
 
   async vote(req, res) {
-    const vote = await userModel.vote(req.body);
+    const vote = await userModel.vote(req.body, req.user.id);
     if (!vote.status) {
       return res.status(409).json({
         status: 409,
