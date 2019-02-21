@@ -15,9 +15,8 @@ pool.on('connect', () => {
 
 const createPartiesTable = async () => {
   const queryText = query.createPartiesTable;
-  pool.query(queryText)
+  await pool.query(queryText)
     .then(() => {
-      pool.end();
     })
     .catch((err) => {
       console.log(err);
@@ -27,9 +26,8 @@ const createPartiesTable = async () => {
 
 const createUsersTable = async () => {
   const queryText = query.createUsersTable;
-  pool.query(queryText)
+  await pool.query(queryText)
     .then(async () => {
-      pool.end();
     })
     .catch((err) => {
       console.log(err);
@@ -39,22 +37,30 @@ const createUsersTable = async () => {
 
 const createOfficesTable = async () => {
   const queryText = query.createOfficesTable;
-  pool.query(queryText)
+  await pool.query(queryText)
     .then(async () => {
-      pool.end();
     })
     .catch((err) => {
       console.log(err);
-      pool.end();
     });
 };
 
+const createCandidatesTable = async () => {
+  const queryText = query.createCandidatesTable;
+  await pool.query(queryText)
+    .then(async () => {
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+
 const dropAllTables = async () => {
   const queryText = query.dropAllTables;
-  pool.query(queryText)
+  await pool.query(queryText)
     .then(async () => {
       console.log('All tables droped');
-      pool.end();
     })
     .catch((err) => {
       console.log(err);
@@ -68,13 +74,9 @@ const dropAllTables = async () => {
   await createOfficesTable();
   await createPartiesTable();
   await createUsersTable();
-  console.log('Taable offices, parties, users created');
+  await createCandidatesTable();
+  pool.end();
+  console.log('Table offices, parties, users, candidates created');
 })().catch((err) => {
   console.log(err);
-});
-
-
-pool.on('remove', () => {
-  // console.log('client removed');
-  process.exit(0);
 });

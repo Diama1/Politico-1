@@ -8,7 +8,6 @@ const PoliticalOffice = {
 
   async create(body) {
     const createQuery = queries.createOffice;
-    console.log(body.type);
     const values = [
       body.name,
       body.type,
