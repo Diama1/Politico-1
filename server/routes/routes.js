@@ -7,7 +7,7 @@ import validateUsers from '../middleware/users';
 import validateParties from '../helpers/partiesValidate';
 import validateOffices from '../helpers/officesValidate';
 import validateCandidates from '../middleware/candidates';
-import User from '../models/users';
+
 
 const router = express.Router();
 
