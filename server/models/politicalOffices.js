@@ -24,11 +24,13 @@ const PoliticalOffice = {
       if (error.routine === '_bt_check_unique') {
         return {
           status: false,
+          code: 409,
           message: 'Office with that name already exist',
         };
       }
       return {
         status: false,
+        code: 503,
         message: error,
       };
     }

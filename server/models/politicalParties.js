@@ -26,11 +26,13 @@ const politicalParty = {
       if (error.routine === '_bt_check_unique') {
         return {
           status: false,
+          code: 409,
           message: 'Party with that name already exist',
         };
       }
       return {
         status: false,
+        code: 503,
         message: error,
       };
     }

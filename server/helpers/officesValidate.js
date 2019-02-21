@@ -7,6 +7,7 @@ const verifyToken = async (token, requireAdmin) => {
   if (!token) {
     return {
       status: false,
+      code: 404,
       message: 'Token is not provided',
     };
   }
@@ -17,6 +18,7 @@ const verifyToken = async (token, requireAdmin) => {
     if (!rows[0]) {
       return {
         status: false,
+        code: 401,
         message: 'The token you provided is invalid',
       };
     }
@@ -24,6 +26,7 @@ const verifyToken = async (token, requireAdmin) => {
       if (!rows[0].isadmin) {
         return {
           status: false,
+          code: 403,
           message: 'Not allowed, admin only',
         };
       }
@@ -35,6 +38,7 @@ const verifyToken = async (token, requireAdmin) => {
   } catch (error) {
     return {
       status: false,
+      code: 401,
       message: 'The token you provided is invalid',
     };
   }
@@ -44,8 +48,8 @@ const authenticate = async (req, res, next, requireAdmin) => {
   const token = req.headers['user-token'];
   const verifiedToken = await verifyToken(token, requireAdmin);
   if (!verifiedToken.status) {
-    return res.status(400).json({
-      status: 400,
+    return res.status(verifiedToken.code).json({
+      status: verifiedToken.code,
       error: verifiedToken.message,
     });
   }

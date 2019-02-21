@@ -31,13 +31,15 @@ const User = {
       };
     } catch (error) {
       if (error.routine === '_bt_check_unique') {
-        response = {
+        return {
           status: false,
+          code: 409,
           message: 'User with that EMAIL already exist',
         };
       }
       response = {
         status: false,
+        code: 503,
         message: error,
       };
     }
