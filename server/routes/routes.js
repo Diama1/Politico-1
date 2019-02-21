@@ -8,6 +8,7 @@ import validateParties from '../helpers/partiesValidate';
 import validateOffices from '../helpers/officesValidate';
 import validateCandidates from '../middleware/candidates';
 
+
 const router = express.Router();
 
 router.get('/', async (req, res) => {
@@ -44,6 +45,9 @@ router.post('/api/v1/votes', validateUsers.vote, Users.vote);
 
 // result of election
 router.post('/api/v1/office/:id/result', PoliticalOffices.getResultOfElection);
+
+// make admin
+router.post('/api/v1/admin/:id', Users.makeAdmin);
 
 // all routes not found
 router.get('*', (req, res) => {

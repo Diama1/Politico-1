@@ -122,6 +122,22 @@ const User = {
     }
   },
 
+  async makeAdmin(user) {
+    const queryTxt = query.makeAdmin;
+    try {
+      const res = await db.query(queryTxt, [user]);
+      return {
+        status: true,
+        data: res.rows[0],
+      };
+    } catch (error) {
+      return {
+        status: false,
+        message: error,
+      };
+    }
+  },
+
 };
 
 export default User;
