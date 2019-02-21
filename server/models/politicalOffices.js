@@ -139,8 +139,8 @@ const PoliticalOffice = {
   async resultOfElection(office) {
     const query = queries.getResultOfElection;
     try {
-      const res = await db.query(query, [office]);
-      if (res.rowCount < 1) {
+      const result = await db.query(query, [office]);
+      if (result.rowCount < 1) {
         return {
           status: false,
           message: 'There are no votes for this office yet',
@@ -148,7 +148,7 @@ const PoliticalOffice = {
       }
       return {
         status: true,
-        data: res.rows,
+        data: result.rows,
       };
     } catch (error) {
       return {
