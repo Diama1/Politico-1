@@ -68,6 +68,60 @@ const User = {
     }
   },
 
+  async vote(body) {
+    const queryTxt = query.vote;
+    const check = await this.checkVote(body.office, body.createdBy);
+    if (!check.status) {
+      return {
+        status: false,
+        message: check.message,
+      };
+    }
+    const params = [
+      moment(new Date()),
+      body.createdBy,
+      body.office,
+      body.candidate,
+    ];
+    try {
+      const { rows } = await db.query(queryTxt, params);
+      return {
+        status: true,
+        data: rows[0],
+      };
+    } catch (error) {
+      return {
+        status: false,
+        message: error,
+      };
+    }
+  },
+
+  async checkVote(office, user) {
+    const queryTxt = query.checkVote;
+    const values = [
+      office,
+      user,
+    ];
+    try {
+      const res = await db.query(queryTxt, values);
+      if (res.rowCount > 0) {
+        return {
+          status: false,
+          message: 'You have already voted for this office',
+        };
+      }
+      return {
+        status: true,
+      };
+    } catch (error) {
+      return {
+        status: false,
+        message: error,
+      };
+    }
+  },
+
 };
 
 export default User;

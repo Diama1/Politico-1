@@ -39,6 +39,24 @@ const User = {
     });
   },
 
+  async vote(req, res) {
+    const vote = await userModel.vote(req.body);
+    if (!vote.status) {
+      return res.status(400).json({
+        status: 400,
+        error: vote.message,
+      });
+    }
+    return res.status(200).json({
+      status: 200,
+      data: [{
+        office: vote.data.office,
+        candidate: vote.data.candidate,
+        voter: vote.data.createdby,
+      }],
+    });
+  },
+
 };
 
 export default User;
