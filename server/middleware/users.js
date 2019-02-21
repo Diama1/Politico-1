@@ -36,6 +36,22 @@ const validate = {
     }
     return next();
   },
+
+  vote(req, res, next) {
+    const schema = {
+      createdBy: Joi.number().required(),
+      office: Joi.number().required(),
+      candidate: Joi.number().required(),
+    };
+    const result = Joi.validate(req.body, schema);
+    if (result.error) {
+      return res.status(400).json({
+        status: 400,
+        message: result.error.details[0].message.replace(/[^a-zA-Z ]/g, ''),
+      });
+    }
+    return next();
+  },
 };
 
 export default validate;

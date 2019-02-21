@@ -39,6 +39,8 @@ router.delete('/api/v1/offices/:id', PoliticalOffices.delete);
 // Candidates
 router.post('/api/v1/office/:id/register', validateCandidates.register, Candidates.register);
 
+// vote
+router.post('/api/v1/votes', validateUsers.vote, Users.vote);
 
 // all routes not found
 router.get('*', (req, res) => {

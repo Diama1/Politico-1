@@ -1,4 +1,3 @@
-
 const query = {
   createPartiesTable: `CREATE TABLE IF NOT EXISTS parties(
     id SERIAL PRIMARY KEY,
@@ -11,7 +10,7 @@ const query = {
 
   createUsersTable: `CREATE TABLE IF NOT EXISTS users(
     id SERIAL PRIMARY KEY,
-    firstname VARCHAR(128) NOT NULL ,
+    firstname VARCHAR(128) NOT NULL,
     lastname VARCHAR(128) NOT NULL ,
     othername VARCHAR(128) ,
     email VARCHAR(128) NOT NULL UNIQUE,
@@ -24,9 +23,23 @@ const query = {
   )`,
   createCandidatesTable: `CREATE TABLE IF NOT EXISTS candidates(
     id SERIAL PRIMARY KEY,
-    office INTEGER REFERENCES offices(id) ON DELETE CASCADE,
-    party INTEGER REFERENCES parties(id) ON DELETE CASCADE,
-    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+    office INTEGER ,
+    party INTEGER ,
+    user_id INTEGER ,
+    FOREIGN KEY (office) REFERENCES offices (id) ON DELETE NO ACTION,
+    FOREIGN KEY (party) REFERENCES parties (id) ON DELETE NO ACTION,
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE NO ACTION
+  )`,
+
+  createVotesTable: `CREATE TABLE IF NOT EXISTS votes(
+    id SERIAL PRIMARY KEY,
+    cretatedOn VARCHAR(128),
+    createdBy INTEGER ,
+    office INTEGER ,
+    candidate INTEGER ,
+    FOREIGN KEY (createdBy) REFERENCES users (id) ON DELETE NO ACTION,
+    FOREIGN KEY (office) REFERENCES offices (id) ON DELETE NO ACTION,
+    FOREIGN KEY (candidate) REFERENCES candidates (id) ON DELETE NO ACTION
   )`,
 
   createOfficesTable: `CREATE TABLE IF NOT EXISTS offices(
@@ -74,11 +87,15 @@ const query = {
 
   deleteParty: 'DELETE from parties where id = $1',
 
-  dropAllTables: 'DROP TABLE IF EXISTS offices, parties, users',
+  dropAllTables: 'DROP TABLE IF EXISTS offices, parties, users CASCADE',
 
   register: 'INSERT INTO candidates(office, party, user_id) VALUES($1, $2, $3) returning *',
 
+  vote: 'INSERT INTO votes(cretatedon, createdby, office, candidate) VALUES($1, $2, $3, $4) returning *',
+
   checkCandidate: 'SELECT * FROM candidates where office = $1 AND user_id = $2',
+
+  checkVote: 'SELECT * FROM votes where office = $1 AND createdby = $2',
 
 };
 
