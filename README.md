@@ -7,12 +7,15 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/aed8283d1f8199d520b2/maintainability)](https://codeclimate.com/github/dusmel/Politico/maintainability) 
 ## Features
 
- - Users can sign up. Users can login. Admin (electoral body) can create
- - User can reset password.
- - political parties. Admin (electoral body) can delete a political
- -  party. Admin (electoral body) can create different ​ political
- -  offices​ . Users can vote for only one politician per ​ political
- -  office​ . Users can see the results of election.
+- Users can sign up. Users can login.
+- Admin (electoral body) can create political parties.
+- Admin (electoral body) can delete a political party.
+- Admin (electoral body) can create different ​ political offices​ .
+- Users can see all the offices
+- Users can see all the parties
+- Users can vote for only one politician per ​ political offices​ .
+- Users can see the results of election.
+- Users can create petitions
 
 
 ## Getting Started
