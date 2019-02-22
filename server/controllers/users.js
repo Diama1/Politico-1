@@ -5,8 +5,8 @@ const User = {
     const newUser = userModel.create(req.body);
     newUser.then((user) => {
       if (!user.status) {
-        return res.status(404).json({
-          status: 404,
+        return res.status(user.code).json({
+          status: user.code,
           error: user.message,
         });
       }
@@ -40,10 +40,10 @@ const User = {
   },
 
   async vote(req, res) {
-    const vote = await userModel.vote(req.body);
+    const vote = await userModel.vote(req.body, req.user.id);
     if (!vote.status) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(409).json({
+        status: 409,
         error: vote.message,
       });
     }

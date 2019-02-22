@@ -6,8 +6,8 @@ const Candidate = {
     const params = [req.params.id, req.body.party, req.body.candidate];
     const registration = await candidateData.register(params);
     if (!registration.status) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(409).json({
+        status: 409,
         error: registration.message,
       });
     }

@@ -31,13 +31,15 @@ const User = {
       };
     } catch (error) {
       if (error.routine === '_bt_check_unique') {
-        response = {
+        return {
           status: false,
+          code: 409,
           message: 'User with that EMAIL already exist',
         };
       }
       response = {
         status: false,
+        code: 503,
         message: error,
       };
     }
@@ -68,9 +70,9 @@ const User = {
     }
   },
 
-  async vote(body) {
+  async vote(body, userId) {
     const queryTxt = query.vote;
-    const check = await this.checkVote(body.office, body.createdBy);
+    const check = await this.checkVote(body.office, userId);
     if (!check.status) {
       return {
         status: false,
@@ -79,7 +81,7 @@ const User = {
     }
     const params = [
       moment(new Date()),
-      body.createdBy,
+      userId,
       body.office,
       body.candidate,
     ];

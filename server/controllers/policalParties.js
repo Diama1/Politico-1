@@ -7,8 +7,8 @@ const PoliticalParty = {
     const politicalParty = partyData.create(req.body);
     politicalParty.then((party) => {
       if (!party.status) {
-        return res.status(400).json({
-          status: 400,
+        return res.status(party.code).json({
+          status: party.code,
           error: party.message,
         });
       }
