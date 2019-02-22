@@ -24,8 +24,8 @@ const User = {
     const loginUser = userModel.login(req.body);
     loginUser.then((user) => {
       if (!user.status) {
-        return res.status(404).json({
-          status: 404,
+        return res.status(401).json({
+          status: 401,
           error: user.message,
         });
       }
