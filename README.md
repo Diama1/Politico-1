@@ -1,7 +1,7 @@
 ## Politico
  [Politico](http://politiqo.herokuapp.com) enables citizens to give their mandate to politicians running for different government offices while building trust in the process through transparency.
 
-[![Coverage Status](https://coveralls.io/repos/github/dusmel/Politico/badge.svg)](https://coveralls.io/github/dusmel/Politico)s 
+[![Coverage Status](https://coveralls.io/repos/github/dusmel/Politico/badge.svg)](https://coveralls.io/github/dusmel/Politico) 
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/aed8283d1f8199d520b2/maintainability)](https://codeclimate.com/github/dusmel/Politico/maintainability) 
 ## Features
