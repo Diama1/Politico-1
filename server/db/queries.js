@@ -49,6 +49,16 @@ const query = {
     created_date TIMESTAMP,
     modified_date TIMESTAMP
   )`,
+  createPetitionsTable: `CREATE TABLE IF NOT EXISTS petitions(
+    id SERIAL PRIMARY KEY,
+    cretatedOn VARCHAR(128),
+    createdBy INTEGER ,
+    office INTEGER ,
+    body VARCHAR(511),
+    evidence VARCHAR(511),
+    FOREIGN KEY (createdBy) REFERENCES users (id) ON DELETE NO ACTION,
+    FOREIGN KEY (office) REFERENCES offices (id) ON DELETE NO ACTION
+  )`,
 
   signup: `INSERT INTO
   users(firstname, lastname, othername, email, password, phoneNumber, passportUrl, created_date, modified_date)
@@ -98,6 +108,8 @@ const query = {
   checkVote: 'SELECT * FROM votes where office = $1 AND createdby = $2',
 
   getResultOfElection: 'SELECT  office ,candidate, CAST(COUNT(*)AS Int) AS result FROM votes where office = $1 GROUP BY candidate, office',
+
+  addPetition: 'INSERT INTO petitions(cretatedon, createdby, office, body, evidence) VALUES($1, $2, $3, $4, $5) returning *',
 
   makeAdmin: 'UPDATE users SET isadmin = true where id = $1 returning *',
 

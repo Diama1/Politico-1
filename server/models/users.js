@@ -124,6 +124,30 @@ const User = {
     }
   },
 
+  async addPetition(body, userId) {
+    const evidence = body.evidence.join(',');
+    const queryTxt = query.addPetition;
+    const values = [
+      moment(new Date()),
+      userId,
+      body.office,
+      body.body,
+      evidence,
+    ];
+    try {
+      const result = await db.query(queryTxt, values);
+      return {
+        status: true,
+        data: result.rows[0],
+      };
+    } catch (error) {
+      return {
+        status: false,
+        message: error,
+      };
+    }
+  },
+
   async makeAdmin(user) {
     const queryTxt = query.makeAdmin;
     try {

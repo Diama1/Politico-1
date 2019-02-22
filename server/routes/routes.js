@@ -46,6 +46,9 @@ router.post('/api/v1/votes', validateUsers.vote, Users.vote);
 // result of election
 router.post('/api/v1/office/:id/result', PoliticalOffices.getResultOfElection);
 
+// petition
+router.post('/api/v1/petitions', validateUsers.petition, Users.addPetition);
+
 // make admin
 router.post('/api/v1/admin/:id', Users.makeAdmin);
 
