@@ -56,8 +56,8 @@ const PoliticalOffice = {
     console.log(updatedOffice);
     updatedOffice.then((office) => {
       if (!office.status) {
-        return res.status(404).json({
-          status: 404,
+        return res.status(409).json({
+          status: 409,
           error: office.message,
         });
       }
