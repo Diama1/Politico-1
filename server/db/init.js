@@ -65,6 +65,16 @@ const createVotesTable = async () => {
       // pool.end();
     });
 };
+const createPetitionsTable = async () => {
+  const queryText = query.createPetitionsTable;
+  await pool.query(queryText)
+    .then(async () => {
+    })
+    .catch((err) => {
+      console.log(err);
+      // pool.end();
+    });
+};
 
 
 const dropAllTables = async () => {
@@ -86,6 +96,7 @@ const dropAllTables = async () => {
   await createPartiesTable();
   await createUsersTable();
   await createCandidatesTable();
+  await createPetitionsTable();
   await createVotesTable();
   pool.end();
   console.log('Table offices, parties, users, candidates created');

@@ -108,6 +108,21 @@ const validate = {
     }
     return authenticate(req, res, next);
   },
+  async petition(req, res, next) {
+    const schema = {
+      office: Joi.number().required(),
+      body: Joi.string().trim().required(),
+      evidence: Joi.array().required(),
+    };
+    const result = Joi.validate(req.body, schema);
+    if (result.error) {
+      return res.status(400).json({
+        status: 400,
+        message: result.error.details[0].message.replace(/[^a-zA-Z ]/g, ''),
+      });
+    }
+    return authenticate(req, res, next);
+  },
 };
 
 export default validate;

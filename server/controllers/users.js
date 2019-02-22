@@ -57,6 +57,27 @@ const User = {
     });
   },
 
+  async addPetition(req, res) {
+    const petition = await userModel.addPetition(req.body, req.user.id);
+    if (!petition.status) {
+      return res.status(503).json({
+        status: 503,
+        error: petition.message,
+      });
+    }
+    console.log(petition);
+    return res.status(200).json({
+      status: 200,
+      data: [{
+        id: petition.data.id,
+        office: petition.data.office,
+        createdBy: petition.data.createdby,
+        text: petition.data.body,
+        evidence: petition.data.evidence.split(','),
+      }],
+    });
+  },
+
   async makeAdmin(req, res) {
     const newAdmin = await userModel.makeAdmin(req.params.id);
     if (!newAdmin.status) {
