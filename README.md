@@ -17,6 +17,7 @@
 - Users can create petitions
 
 
+
 ## Getting Started
 
 You will need to have [node](https://nodejs.org/en/) and [npm](https://www.npmjs.com/get-npm) installed to run the application
