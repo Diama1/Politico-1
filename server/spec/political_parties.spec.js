@@ -38,6 +38,8 @@ describe('Political party endpoint', () => {
     });
   });
 
+
+
   const error_data = {
     name: 'OPO',
   };
